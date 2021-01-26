@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.Rproj.user
+
+data_processing/data/*
+data_processing/r_lodes_census_processing/.RData
+data_processing/r_lodes_census_processing/.Rhistory
