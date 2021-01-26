@@ -23,6 +23,15 @@ yarn-debug.log*
 yarn-error.log*
 .Rproj.user
 
-data_processing/data/*
 data_processing/r_lodes_census_processing/.RData
 data_processing/r_lodes_census_processing/.Rhistory
+
+# Ran find . -size +5M | cat >> .gitignore to filter out large data files
+data_processing/r_lodes_census_processing/.Rproj.user/B56E1AD3/ctx/ctx-45180/environment
+data_processing/r_lodes_census_processing/.Rproj.user/B56E1AD3/ctx/ctx-32012/options
+data_processing/r_lodes_census_processing/.Rproj.user/B56E1AD3/ctx/ctx-32012/environment
+data_processing/data/2015_commuter_data_stripped.csv
+data_processing/data/2015_raw_commuter_data.xlsx
+data_processing/data/full_tract_data.geojson
+data_processing/data/us_tracts.geojson
+data_processing/data/lodes_data.csv

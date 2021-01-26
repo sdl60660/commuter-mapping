@@ -1,10 +1,7 @@
-library(tigris)
-library(ggplot2)
 library(tidycensus)
 library(lehdr)
 library(tidyverse)
 library(purrr)
-options(tigris_use_cache = TRUE)
 
 # census_vars <- load_variables(2015, dataset="acs5", cache=T)
 
@@ -26,19 +23,3 @@ for(type in c("main", "aux")) {
   }
 }
 
-
-# joined_lodes <- map_dfr(c("main", "aux"), function(type) {
-#   map_dfr(us_states[1:3], function(state) {
-#     try({
-#       grab_lodes(state = state, year = 2018, lodes_type = "od", job_type = "JT01",
-#                  segment = "S000", state_part = type, agg_geo = "tract") %>%
-#         select(year, state, h_tract, w_tract, S000)
-#     })
-#   })
-# })
-
-# write_csv(joined_lodes, "../data/lodes_data.csv", append = TRUE)
-  
-  
-# joined <- x %>%
-#   rbind(y)
