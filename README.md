@@ -1,3 +1,5 @@
 # Commuter Mapping
 
-Mapping commuter rates from metro area census tracts. Early WIP.
+Mapping commuter rates from metro area census tracts.
+
+Live project (early WIP) is here: https://commuter-mapping.herokuapp.com/
