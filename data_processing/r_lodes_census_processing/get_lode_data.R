@@ -13,7 +13,8 @@ for(type in c("main", "aux")) {
     try({
         lodes <- grab_lodes(state = state, year = 2018, lodes_type = "od", job_type = "JT01",
                    segment = "S000", state_part = type, agg_geo = "tract") %>%
-        select(year, state, h_tract, w_tract, S000)
+        select(h_tract, w_tract, S000) %>%
+        rename( total_commuters = S000 )
         
         # Append lode data for state and type (intra/inter-state commutes) to CSV
         write_csv(lodes, "../data/lodes_data.csv", append = TRUE, col_names = col_names_flag)

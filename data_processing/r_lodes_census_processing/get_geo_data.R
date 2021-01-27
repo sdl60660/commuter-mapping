@@ -20,7 +20,7 @@ tract_centroids <- st_centroid(us_tracts) %>%
   select(GEOID, geometry)
 
 # Write to GeoJSON
-st_write(us_tracts, '../data/us_tracts.geojson')
+# st_write(us_tracts, '../data/us_tracts.geojson')
 
 # Get geodata for MSAs
 msa_geo <- core_based_statistical_areas(cb = TRUE, resolution = "500k", year= 2018)
@@ -53,20 +53,6 @@ tracts_with_msas <- st_join(tract_centroids, msa_data, type = st_intersects) %>%
   select(MSA_ID, GEOID, MSA) %>%
   filter(MSA != "")
 
-# Get Urban Areas
-# cities <- urban_areas(cb = TRUE, year = 2018) %>%
-#   rename(GEOID = GEOID10)
-# cities_acs <- get_acs("urban area", variables = "B00001_001", year = 2018)
-
-
-# subdivisions <- map_df(us_states, function(us_state) {
-#   county_subdivisions(state = us_state, cb = TRUE, year = 2018)
-# })
-# subdivisions_acs <- map_df(us_states, function(us_state) {
-#   get_acs("county subdivision", state = us_state, variables = "B00001_001", year = 2018)
-# }) 
-# subdivision_data <- merge(x = subdivisions, y = subdivisions_acs, by = "GEOID")
-
 places <- map_df(us_states, function(us_state) {
   places(state = us_state, cb = TRUE, year = 2018)
 })
@@ -93,6 +79,8 @@ full_tract_data <- merge(tracts_with_place_names, us_tracts, by = "GEOID") %>%
     STATE_ID = STATEFP,
     COUNTY_ID = COUNTYFP
   )
+# Write tract data to geojson
+st_write(full_tract_data, '../data/full_tract_data.geojson')
 
 
 # Create dict of largest cities in each MSA
@@ -111,6 +99,8 @@ cities_with_msas <- st_join(places_centroids, msa_data, type = st_intersects) %>
   ) %>% 
   select(CITY, CITY_ID, CITY_population, MSA, MSA_ID, MSA_population)
 cities_with_msas$CITY_population <- 10*cities_with_msas$CITY_population
+# Write dict of MSAs and largest cities to CSV
+write_csv(cities_with_msas, '../data/msa_largest_cities.csv')
 
 
 # ggplot() + 

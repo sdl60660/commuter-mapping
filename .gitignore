@@ -35,3 +35,4 @@ data_processing/data/2015_raw_commuter_data.xlsx
 data_processing/data/full_tract_data.geojson
 data_processing/data/us_tracts.geojson
 data_processing/data/lodes_data.csv
+data_processing/data/tracts_with_commuter_data.geojson
