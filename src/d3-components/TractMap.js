@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
 import d3Tip from "d3-tip"
+import * as chromatic from "d3-scale-chromatic";
 import * as topojson from "topojson-client";
 
 
@@ -28,10 +29,13 @@ class TractMap {
     }
 
     setScales = () => {
-        this.colorScale =
-            d3.scaleLinear()
-                .domain([0, 1])
-                .range(["white", "purple"])
+        this.colorScales =
+            chromatic.schemeCategory10.map((color) => {
+                return d3.scaleLinear()
+                    .domain([0, 1])
+                    .range(["white", color])
+            })
+           
     }
 
     generateMap = ({ geoJSON, projection, mapColor }) => {
@@ -63,8 +67,9 @@ class TractMap {
                     // .style("stroke", "black")
                     // .style('stroke-width', 0.5)
                     .style("fill", d => {
-                        const mainCityCommuterPct = 1.0*d.properties.main_city_commuters / d.properties.total_commuters;
-                        return this.colorScale(mainCityCommuterPct)
+                        const scaleIndex = Math.round((parseInt(d.properties.MSA_ID) / 72)) % 10
+                        const mainCityCommuterPct = d.properties.total_commuters > 0 ? 1.0*d.properties.main_city_commuters / d.properties.total_commuters : 0.0;
+                        return this.colorScales[scaleIndex](mainCityCommuterPct)
                     })
             );
     };
