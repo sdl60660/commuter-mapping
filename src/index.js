@@ -1,17 +1,37 @@
+// React
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+
+// Outside Libraries
+import { json } from 'd3-fetch';
+
+// Styles
+import './styles/styles.scss';
+
+// React Components
+import Header from './components/Header';
+import Intro from './components/Intro';
+import Footer from './components/Footer';
+import MapWrapper from './components/MapWrapper';
 import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+// Begin loading datafiles
+const promises = [
+  json("data/simplified_tract_data.json")
+];
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+// Render React components (and inner d3 viz) on data load
+Promise.all(promises).then((allData) => {
+
+  ReactDOM.render(
+    <div>
+      <Header />
+      <Intro />
+      <MapWrapper geoData={allData[0]}/>
+      <Footer githubLink={"https://github.com/sdl60660/commuter-mapping"} />
+    </div>,
+    document.getElementById('root')
+  );
+})
+
 reportWebVitals();

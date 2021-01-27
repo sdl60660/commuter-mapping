@@ -1,0 +1,36 @@
+
+.footer {
+    font-size: $font-size-xs;
+    padding-top: $m-size;
+    padding-bottom: $l-size;
+    min-height: 10vh;
+    font-family: "Helvetica Neue", helvetica, arial, sans-serif;
+    max-width: 70vw;
+    margin: $l-size auto 0 auto;
+
+    width: 50rem;
+    max-width: 55vw;
+    // text-align: justify;
+
+    @media screen and (max-width: $vertical-breakpoint) {
+        display: none;
+    }
+}
+
+.footer a {
+    text-decoration: none;
+}
+
+.footer__section {
+    margin-bottom: $m-size;
+}
+
+.icon-img {
+	height: 13px;
+    width: 13px;
+    padding: 5px 2px 0px 2px;
+}
+
+.footer hr {
+    margin-bottom: $m-size;
+}
