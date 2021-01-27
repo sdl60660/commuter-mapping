@@ -21,6 +21,14 @@ class TractMap {
             .attr("viewBox", [0, 0, width, height]);
 
         this.setScales();
+
+        this.tractGroup = this.svg.append("g")
+            .attr("class", "tract-map");
+            // selectAll("path");
+
+        this.stateGroup = this.svg.append("g")
+            .attr("class", "state-map");
+            // .selectAll("path");
         
         // Generate background map and projection
         this.tractGeoJSON = topojson.feature(tractGeo, tractGeo.objects["tracts_with_commuter_data"]);
@@ -32,10 +40,8 @@ class TractMap {
         // const projection = d3.geoAlbersUsa()
         //     .fitExtent([[25, 25], [width-25, height-25]], this.tractGeoJSON);
         
-        // this.generateMap({ geoJSON: this.stateGeoJSON, projection, mapType: "state" });
-        // this.generateMap({ geoJSON: this.tractGeoJSON, projection, mapType: "tract" });
-
-        this.renderCity({ MSA_ID: "35620" })
+        // this.generateMap({ geoJSON: this.stateGeoJSON, projection, pathGroup: this.stateGroup, mapType: "state" });
+        // this.generateMap({ geoJSON: this.tractGeoJSON, projection, pathGroup: this.tractGroup, mapType: "tract" });
         
     }
 
@@ -50,32 +56,19 @@ class TractMap {
     }
 
 
-    generateMap = ({ geoJSON, projection, mapType }) => {
-        // "properties": {
-        //     "GEOID": "01001020100",
-        //     "MSA": "Montgomery, AL",
-        //     "MSA_ID": "33860",
-        //     "CITY": "Prattville",
-        //     "CITY_ID": "0162328",
-        //     "STATE_ID": "01",
-        //     "COUNTY_ID": "001",
-        //     "total_commuters": 689,
-        //     "main_city_commuters": 283
-        //   }
-
+    generateMap = ({ geoJSON, projection, pathGroup, mapType }) => {
         let path = d3.geoPath()
             .projection(projection);
-                
-        this.mapPath = this.svg.append("g")
-            .attr("class", "background-map")
-            .selectAll("path");
+
         
-        this.mapPath = this.mapPath.data( geoJSON.features, d => d)
+        pathGroup
+            .selectAll("path")
+            .data( geoJSON.features, d => d.properties.GEOID)
             .join(
                 enter => enter.append("path")
                     .attr("d", path)
                     .attr("class", `${mapType}-path`)
-                    .style("opacity", 0.8)
+                    .style("opacity", 1.0)
                     .style("stroke", "black")
                     .style('stroke-width', mapType === "state" ? 0.5 : 0)
                     // .style("fill-opacity", mapType === "state" ? 0 : 1)
@@ -99,7 +92,9 @@ class TractMap {
                         }
                         const scaleIndex = Math.round((parseInt(d.properties.MSA_ID) / 72)) % 10
                         return chromatic.schemeCategory10[scaleIndex];
-                    })
+                    }),
+
+                exit => exit.remove()
             );
     };
 
@@ -113,9 +108,22 @@ class TractMap {
         const projection = d3.geoAlbersUsa()
             .fitExtent([[25, 25], [vis.width-25, vis.height-25]], cityTracts);
         
-        this.generateMap({ geoJSON: cityTracts, projection, mapType: "tract" });
+        this.generateMap({ geoJSON: cityTracts, projection, pathGroup: vis.tractGroup, mapType: "tract" });
     }
 
 }
 
 export default TractMap;
+
+
+// "properties": {
+//     "GEOID": "01001020100",
+//     "MSA": "Montgomery, AL",
+//     "MSA_ID": "33860",
+//     "CITY": "Prattville",
+//     "CITY_ID": "0162328",
+//     "STATE_ID": "01",
+//     "COUNTY_ID": "001",
+//     "total_commuters": 689,
+//     "main_city_commuters": 283
+//   }

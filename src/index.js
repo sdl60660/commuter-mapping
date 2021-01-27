@@ -29,7 +29,7 @@ Promise.all(promises).then((allData) => {
     <div>
       <Header />
       <Intro />
-      <MapWrapper tractGeo={allData[0]} stateGeo={allData[2]}/>
+      <MapWrapper tractGeo={allData[0]} MsaCityMappings={allData[1]} stateGeo={allData[2]}/>
       <Footer githubLink={"https://github.com/sdl60660/commuter-mapping"} />
     </div>,
     document.getElementById('root')
