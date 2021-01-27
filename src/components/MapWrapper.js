@@ -9,12 +9,12 @@ import TractMap from '../d3-components/TractMap';
 
 let vis;
 
-const MapWrapper = ({ geoData }) => {
+const MapWrapper = ({ tractGeo, stateGeo }) => {
 
     const refElement = useRef(null);
 
     useEffect(() => {
-        vis = new TractMap(refElement.current, { width: 1400, height: 800, geoData });
+        vis = new TractMap(refElement.current, { width: 1400, height: 800, tractGeo, stateGeo });
     }, [])
 
     return (

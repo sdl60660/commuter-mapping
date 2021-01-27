@@ -11,8 +11,10 @@ class TractMap {
 
     constructor(containerEl, props) {
         this.containerEl = containerEl;
-        const mapColor = "blue";
-        const { width, height, geoData } = props;
+        const { width, height, tractGeo, stateGeo } = props;
+
+        this.width = width;
+        this.height = height;
 
         this.svg = d3.select(containerEl)
             .append("svg")
@@ -21,11 +23,20 @@ class TractMap {
         this.setScales();
         
         // Generate background map and projection
-        const geoJSON = topojson.feature(geoData, geoData.objects["tracts_with_commuter_data"]);
-        const projection = d3.geoAlbersUsa()
-            .fitExtent([[0, 15], [width-60, height-60]], geoJSON);
-        this.generateMap({ geoJSON, projection, mapColor });
+        this.tractGeoJSON = topojson.feature(tractGeo, tractGeo.objects["tracts_with_commuter_data"]);
+        this.stateGeoJSON = topojson.feature(stateGeo, stateGeo.objects.states);
 
+        // this.tractGeoJSON.features = this.tractGeoJSON.features.filter(feature => feature.properties.MSA_ID === "33860")
+        // console.log(this.tractGeoJSON)
+
+        // const projection = d3.geoAlbersUsa()
+        //     .fitExtent([[25, 25], [width-25, height-25]], this.tractGeoJSON);
+        
+        // this.generateMap({ geoJSON: this.stateGeoJSON, projection, mapType: "state" });
+        // this.generateMap({ geoJSON: this.tractGeoJSON, projection, mapType: "tract" });
+
+        this.renderCity({ MSA_ID: "35620" })
+        
     }
 
     setScales = () => {
@@ -38,7 +49,8 @@ class TractMap {
            
     }
 
-    generateMap = ({ geoJSON, projection, mapColor }) => {
+
+    generateMap = ({ geoJSON, projection, mapType }) => {
         // "properties": {
         //     "GEOID": "01001020100",
         //     "MSA": "Montgomery, AL",
@@ -58,21 +70,52 @@ class TractMap {
             .attr("class", "background-map")
             .selectAll("path");
         
-        this.mapPath = this.mapPath.data( geoJSON.features.slice(1000), d => d)
+        this.mapPath = this.mapPath.data( geoJSON.features, d => d)
             .join(
                 enter => enter.append("path")
                     .attr("d", path)
-                    .attr("class", "tract-path")
+                    .attr("class", `${mapType}-path`)
                     .style("opacity", 0.8)
-                    // .style("stroke", "black")
-                    // .style('stroke-width', 0.5)
+                    .style("stroke", "black")
+                    .style('stroke-width', mapType === "state" ? 0.5 : 0)
+                    // .style("fill-opacity", mapType === "state" ? 0 : 1)
+                    // .style("fill", d => {
+                    //     if (mapType === "state") {
+                    //         return "white";
+                    //     }
+                    //     const scaleIndex = Math.round((parseInt(d.properties.MSA_ID) / 53)) % 10
+                    //     const mainCityCommuterPct = d.properties.total_commuters > 0 ? 1.0*d.properties.main_city_commuters / d.properties.total_commuters : 0.0;
+                    //     return this.colorScales[scaleIndex](mainCityCommuterPct)
+                    // })
+                    .style("fill-opacity", d => {
+                        if (mapType === "state") {
+                            return 0;
+                        }
+                        return d.properties.total_commuters > 0 ? 1.0*d.properties.main_city_commuters / d.properties.total_commuters : 0.0;
+                    })
                     .style("fill", d => {
+                        if (mapType === "state") {
+                            return "white";
+                        }
                         const scaleIndex = Math.round((parseInt(d.properties.MSA_ID) / 72)) % 10
-                        const mainCityCommuterPct = d.properties.total_commuters > 0 ? 1.0*d.properties.main_city_commuters / d.properties.total_commuters : 0.0;
-                        return this.colorScales[scaleIndex](mainCityCommuterPct)
+                        return chromatic.schemeCategory10[scaleIndex];
                     })
             );
     };
+
+
+    renderCity = ({ MSA_ID }) => {
+        const vis = this;
+
+        const cityFeatures = vis.tractGeoJSON.features.filter(feature => feature.properties.MSA_ID === MSA_ID)
+        const cityTracts = { type: "FeatureCollection", features: cityFeatures };
+
+        const projection = d3.geoAlbersUsa()
+            .fitExtent([[25, 25], [vis.width-25, vis.height-25]], cityTracts);
+        
+        this.generateMap({ geoJSON: cityTracts, projection, mapType: "tract" });
+    }
+
 }
 
 export default TractMap;

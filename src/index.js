@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // Outside Libraries
-import { json } from 'd3-fetch';
+import { json, csv } from 'd3-fetch';
 
 // Styles
 import './styles/styles.scss';
@@ -17,7 +17,9 @@ import reportWebVitals from './reportWebVitals';
 
 // Begin loading datafiles
 const promises = [
-  json("data/simplified_tract_data.json")
+  json("data/simplified_tract_data.json"),
+  csv("data/msa_largest_cities.csv"),
+  json("data/us_states.json")
 ];
 
 // Render React components (and inner d3 viz) on data load
@@ -27,7 +29,7 @@ Promise.all(promises).then((allData) => {
     <div>
       <Header />
       <Intro />
-      <MapWrapper geoData={allData[0]}/>
+      <MapWrapper tractGeo={allData[0]} stateGeo={allData[2]}/>
       <Footer githubLink={"https://github.com/sdl60660/commuter-mapping"} />
     </div>,
     document.getElementById('root')
