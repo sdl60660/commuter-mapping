@@ -111,7 +111,7 @@ class TractMap {
                         if (mapType === "state") {
                             return "white";
                         }
-                        const scaleIndex = Math.round((parseInt(d.properties.MSA_ID) / 53)) % 10
+                        const scaleIndex = Math.round((parseInt(d.properties.MSA_ID) / 72)) % 10
                         return chromatic.schemeCategory10[scaleIndex];
                     }),
 
