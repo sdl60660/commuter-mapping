@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import * as d3 from 'd3';
-import * as chromatic from "d3-scale-chromatic";
 
 // import Loader from './Loader'
 import MapControls from './MapControls';
@@ -13,6 +12,7 @@ let vis;
 const MapWrapper = ({ tractGeo, MsaCityMappings, stateGeo }) => {
 
     const [featuredCity, setFeaturedCity] = useState("35620")
+    const [largestCityDisplay, setLargestCityDisplay] = useState("New York City")
 
     const refElement = useRef(null);
 
@@ -25,9 +25,10 @@ const MapWrapper = ({ tractGeo, MsaCityMappings, stateGeo }) => {
     }, [featuredCity])
 
     return (
-        <div>
-            <MapControls cityData={MsaCityMappings} setCity={setFeaturedCity}/>
-            <div ref={refElement} id={"viz-tile"} />
+        <div className={"map-wrapper"}>
+            <MapControls cityData={MsaCityMappings} setCity={setFeaturedCity} setCityDisplay={setLargestCityDisplay}/>
+            <div ref={refElement} id={"viz-tile"} className={"map-wrapper__map"} />
+            <div id={"legend-message"}>Showing % of workers from a given census tract who work in {largestCityDisplay}</div>
         </div>
     )
 }

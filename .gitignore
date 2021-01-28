@@ -17,6 +17,7 @@
 .env.development.local
 .env.test.local
 .env.production.local
+.eslintcache
 
 npm-debug.log*
 yarn-debug.log*
@@ -36,3 +37,4 @@ data_processing/data/full_tract_data.geojson
 data_processing/data/us_tracts.geojson
 data_processing/data/lodes_data.csv
 data_processing/data/tracts_with_commuter_data.geojson
+data_processing/data/2010_lodes_data.csv

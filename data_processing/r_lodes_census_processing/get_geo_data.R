@@ -13,7 +13,7 @@ us_states <- unique(fips_codes$state)[1:51]
 
 # Get geodata for all US Census Tracts
 us_tracts <- map_df(us_states, function(us_state) {
-  tracts(state = us_state, cb = TRUE, year = 2018)
+  tracts(state = us_state, cb = TRUE, year = 2010)
 })
 # tract_centroids <- gCentroid(spgeom = methods::as(object = us_tracts, Class = "Spatial" ), byid = TRUE )
 tract_centroids <- st_centroid(us_tracts) %>%
@@ -23,9 +23,9 @@ tract_centroids <- st_centroid(us_tracts) %>%
 # st_write(us_tracts, '../data/us_tracts.geojson')
 
 # Get geodata for MSAs
-msa_geo <- core_based_statistical_areas(cb = TRUE, resolution = "500k", year= 2018)
+msa_geo <- core_based_statistical_areas(cb = TRUE, resolution = "500k", year= 2010)
 # Get population data for MSAs and match name formatting to geodata
-msa_acs_data <- get_acs("metropolitan statistical area/micropolitan statistical area", variables = "B00001_001", year = 2018)
+msa_acs_data <- get_acs("metropolitan statistical area/micropolitan statistical area", variables = "B00001_001", year = 2010)
 msa_acs_data$NAME <- substr(msa_acs_data$NAME, 1, nchar(msa_acs_data$NAME)-11)
 
 # Join geodata and population data by GEO_ID/NAME and filter by population
@@ -54,10 +54,10 @@ tracts_with_msas <- st_join(tract_centroids, msa_data, type = st_intersects) %>%
   filter(MSA != "")
 
 places <- map_df(us_states, function(us_state) {
-  places(state = us_state, cb = TRUE, year = 2018)
+  places(state = us_state, cb = TRUE, year = 2010)
 })
 places_acs <- map_df(us_states, function(us_state) {
-  get_acs("place", state = us_state, variables = "B00001_001", year = 2018)
+  get_acs("place", state = us_state, variables = "B00001_001", year = 2010)
 }) 
 places_data <- merge(x = places, y = places_acs, by = "GEOID")
 
@@ -80,7 +80,7 @@ full_tract_data <- merge(tracts_with_place_names, us_tracts, by = "GEOID") %>%
     COUNTY_ID = COUNTYFP
   )
 # Write tract data to geojson
-st_write(full_tract_data, '../data/full_tract_data.geojson')
+st_write(full_tract_data, '../data/2010_full_tract_data.geojson')
 
 
 # Create dict of largest cities in each MSA

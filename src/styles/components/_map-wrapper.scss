@@ -1,0 +1,21 @@
+.map-wrapper {
+    display: flex;
+    // justify-content: center;
+    width: 100%;
+    margin: auto;
+    flex-direction: column;
+    text-align: center;
+}
+
+
+#legend-message {
+    // margin-left: $xl-size;
+}
+
+.map-wrapper__map {
+
+}
+
+.map-wrapper__map svg {
+    max-height: 80vh;
+}

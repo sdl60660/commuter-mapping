@@ -5,10 +5,11 @@ const Intro = (props) => {
     return (
         <div className={"intro-container"}>
             <div className={"intro-container__row"} id={"title-row"}>
-                <h1 className="intro-container__title">Title Here</h1>
+                <h1 className="intro-container__title">Defining Metro Area Commuter Pattners</h1>
             </div>
             <div className={"intro-container__row"}>
-                Intro Here
+                This is a draft project. It uses LODES (LEHD Origin-Destination Employment Statsitics) data from the U.S. Census to better understand and visualize 
+                commuting patterns in metropolitan areas and to better define urban, suburban, exurban and rural boundaries.
             </div>
         </div>
     )
