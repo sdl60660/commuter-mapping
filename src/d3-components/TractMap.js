@@ -21,6 +21,7 @@ class TractMap {
             .attr("viewBox", [0, 0, width, height]);
 
         this.setScales();
+        this.initTooltip();
 
         this.tractGroup = this.svg.append("g")
             .attr("class", "tract-map");
@@ -56,7 +57,29 @@ class TractMap {
     }
 
 
+    initTooltip = () => {
+        this.tip = d3Tip()
+            .attr('class', 'd3-tip')
+            .html((d) => {   
+                const tractData = d.properties;
+                const commuterPct = tractData.main_city_commuters / tractData.total_commuters;
+                
+                return (
+                    `<div class="d3-tip__grid">
+                        <div>Tract: ${tractData.GEOID}</div>
+                        <div>City: ${tractData.CITY}</div>
+                        <div>% Commuters to ${tractData.MSA}: ${d3.format(".1%")(commuterPct)}</div>
+                    </div>`
+                )
+            });
+
+        this.svg.call(this.tip);
+    };
+
+
     generateMap = ({ geoJSON, projection, pathGroup, mapType }) => {
+        const vis = this;
+
         let path = d3.geoPath()
             .projection(projection);
 
@@ -69,28 +92,26 @@ class TractMap {
                     .attr("d", path)
                     .attr("class", `${mapType}-path`)
                     .style("opacity", 1.0)
-                    .style("stroke", "black")
-                    .style('stroke-width', mapType === "state" ? 0.5 : 0)
-                    // .style("fill-opacity", mapType === "state" ? 0 : 1)
-                    // .style("fill", d => {
-                    //     if (mapType === "state") {
-                    //         return "white";
-                    //     }
-                    //     const scaleIndex = Math.round((parseInt(d.properties.MSA_ID) / 53)) % 10
-                    //     const mainCityCommuterPct = d.properties.total_commuters > 0 ? 1.0*d.properties.main_city_commuters / d.properties.total_commuters : 0.0;
-                    //     return this.colorScales[scaleIndex](mainCityCommuterPct)
-                    // })
+                    // .style('stroke-width', mapType === "state" ? 0.5 : 0)
+                    // .style("stroke", "black")
+                    // .style("stroke-width", 0.1)
                     .style("fill-opacity", d => {
                         if (mapType === "state") {
                             return 0;
                         }
                         return d.properties.total_commuters > 0 ? 1.0*d.properties.main_city_commuters / d.properties.total_commuters : 0.0;
                     })
+                    // .on("mouseover", function(e, d) {
+                    //     vis.tip.show(d, this);
+                    // })
+                    // .on("mouseout", () => {
+                    //     vis.tip.hide();
+                    // })
                     .style("fill", d => {
                         if (mapType === "state") {
                             return "white";
                         }
-                        const scaleIndex = Math.round((parseInt(d.properties.MSA_ID) / 72)) % 10
+                        const scaleIndex = Math.round((parseInt(d.properties.MSA_ID) / 53)) % 10
                         return chromatic.schemeCategory10[scaleIndex];
                     }),
 
@@ -127,3 +148,14 @@ export default TractMap;
 //     "total_commuters": 689,
 //     "main_city_commuters": 283
 //   }
+
+
+// .style("fill-opacity", mapType === "state" ? 0 : 1)
+// .style("fill", d => {
+//     if (mapType === "state") {
+//         return "white";
+//     }
+//     const scaleIndex = Math.round((parseInt(d.properties.MSA_ID) / 53)) % 10
+//     const mainCityCommuterPct = d.properties.total_commuters > 0 ? 1.0*d.properties.main_city_commuters / d.properties.total_commuters : 0.0;
+//     return this.colorScales[scaleIndex](mainCityCommuterPct)
+// })

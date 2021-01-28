@@ -19,6 +19,7 @@ const MapControls = ({ setCity, cityData }) => {
     return (
         <div className="map-controls">
             <Select
+                defaultInputValue="New York"
                 className="map-controls__city-select"
                 options={options}
                 onChange={(values) => onChange(values)}
