@@ -141,7 +141,7 @@ Chattanooga,4714000,120000,"Chattanooga, TN-GA",16860,385000
 Kingsport,4739560,42000,"Kingsport-Bristol-Bristol, TN-VA",28700,250000
 Knoxville,4740000,135000,"Knoxville, TN",28940,650000
 Memphis,4748000,400000,"Memphis, TN-MS-AR",32820,870000
-Nashville-Davidson metropolitan government (balance),4752006,445000,"Nashville-Davidson--Murfreesboro--Franklin, TN",34980,1290000
+Nashville-Davidson,4752006,445000,"Nashville-Davidson--Murfreesboro--Franklin, TN",34980,1290000
 Austin,4805000,565000,"Austin-Round Rock, TX",12420,1250000
 Beaumont,4807000,73000,"Beaumont-Port Arthur, TX",13140,275000
 Brownsville,4810768,115000,"Brownsville-Harlingen, TX",15180,260000
@@ -150,7 +150,6 @@ Dallas,4819000,810000,"Dallas-Fort Worth-Arlington, TX",19100,4620000
 El Paso,4824000,385000,"El Paso, TX",21340,490000
 Houston,4835000,1270000,"Houston-The Woodlands-Sugar Land, TX",26420,3490000
 Killeen,4839148,76000,"Killeen-Temple, TX",28660,295000
-Laredo,4841464,165000,NA,NA,NA
 McAllen,4845384,71000,"McAllen-Edinburg-Mission, TX",32580,395000
 San Antonio,4865000,870000,"San Antonio-New Braunfels, TX",41700,1490000
 Ogden,4955980,66000,"Ogden-Clearfield, UT",36260,520000
