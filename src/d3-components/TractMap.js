@@ -21,29 +21,31 @@ class TractMap {
             .attr("viewBox", [0, 0, width, height]);
 
         const zoomed = function(event, d) {
-            console.log(event, d);
-            d3.selectAll("g").attr("transform", event.transform);
+            // console.log(event, d);
+            d3.selectAll(".map-paths").attr("transform", event.transform);
         }
 
         const zoom = d3.zoom()
             .scaleExtent([1, 8])
-            .translateExtent([[25, 25], [this.width-25, this.height-25]])
+            .translateExtent([[0, 0], [this.width, this.height]])
             .on("zoom", zoomed);
         
-        this.svg.call(zoom);
+        this.svg.call(zoom)
+            // .on("wheel.zoom", null)
+            // .on("wheel", event => event.preventDefault());
 
         this.setScales();
         this.initTooltip();
 
         this.tractGroup = this.svg.append("g")
-            .attr("class", "tract-map");
+            .attr("class", "map-paths tract-map");
             // selectAll("path");
 
         this.cityGroup = this.svg.append("g")
-            .attr("class", "city-boundary-map");
+            .attr("class", "map-paths city-boundary-map");
 
         this.stateGroup = this.svg.append("g")
-            .attr("class", "state-map");
+            .attr("class", "map-paths state-map");
             // .selectAll("path");
         
         // Generate background map and projection
@@ -154,7 +156,7 @@ class TractMap {
         const cityTracts = { type: "FeatureCollection", features: cityFeatures };
 
         const projection = d3.geoAlbersUsa()
-            .fitExtent([[25, 25], [vis.width-25, vis.height-25]], cityTracts);
+            .fitExtent([[0, 0], [vis.width, vis.height]], cityTracts);
         
         const msaCitiesFeatures = vis.cityGeoJSON.features.filter(city => city.properties.MSA_ID === MSA_ID);
         const msaCities = { type: "FeatureCollecton", features: msaCitiesFeatures};

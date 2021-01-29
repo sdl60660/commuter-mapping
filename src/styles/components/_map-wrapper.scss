@@ -13,7 +13,16 @@
 }
 
 .map-wrapper__map {
-    padding: 0 $m-size;
+    // margin: auto;
+    padding: 0 $l-size;
+    // max-width: 80%;
+    width: 50%;
+    margin: auto;
+
+    @media screen and (max-width: $mobile-breakpoint){
+        width: 90%;
+        padding: unset;
+    }
 }
 
 .map-wrapper__map svg {
