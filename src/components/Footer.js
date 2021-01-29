@@ -20,6 +20,7 @@ const Footer = ({ githubLink = ""  }) => {
             
             <div className="footer__section">
                 <p><strong>Notes</strong></p>
+                <p>Metropolitan areas with at least 250,000 people are included, with the exception of Anchorange, AK because U.S. Census LODES commuter data is not available for Alaska.</p>
             </div>
 
             <p>Last Updated: January 2021</p>
