@@ -20,6 +20,18 @@ class TractMap {
             .append("svg")
             .attr("viewBox", [0, 0, width, height]);
 
+        const zoomed = function(event, d) {
+            console.log(event, d);
+            d3.selectAll("g").attr("transform", event.transform);
+        }
+
+        const zoom = d3.zoom()
+            .scaleExtent([1, 8])
+            .translateExtent([[25, 25], [this.width-25, this.height-25]])
+            .on("zoom", zoomed);
+        
+        this.svg.call(zoom);
+
         this.setScales();
         this.initTooltip();
 
@@ -47,6 +59,9 @@ class TractMap {
         
         // this.generateMap({ geoJSON: this.stateGeoJSON, projection, pathGroup: this.stateGroup, mapType: "state" });
         // this.generateMap({ geoJSON: this.tractGeoJSON, projection, pathGroup: this.tractGroup, mapType: "tract" });
+
+        // this.zoom = d3.zoom().on("zoom", zoomed);
+        // this.selection.call(.on("zoom", zoomed));
         
     }
 
