@@ -11,7 +11,7 @@ class TractMap {
 
     constructor(containerEl, props) {
         this.containerEl = containerEl;
-        const { width, height, tractGeo, stateGeo } = props;
+        const { width, height, tractGeo, stateGeo, cityBoundaries } = props;
 
         this.width = width;
         this.height = height;
@@ -27,6 +27,9 @@ class TractMap {
             .attr("class", "tract-map");
             // selectAll("path");
 
+        this.cityGroup = this.svg.append("g")
+            .attr("class", "city-boundary-map");
+
         this.stateGroup = this.svg.append("g")
             .attr("class", "state-map");
             // .selectAll("path");
@@ -34,6 +37,7 @@ class TractMap {
         // Generate background map and projection
         this.tractGeoJSON = topojson.feature(tractGeo, tractGeo.objects["tracts_with_commuter_data"]);
         this.stateGeoJSON = topojson.feature(stateGeo, stateGeo.objects.states);
+        this.cityGeoJSON = topojson.feature(cityBoundaries, cityBoundaries.objects.places)
 
         // this.tractGeoJSON.features = this.tractGeoJSON.features.filter(feature => feature.properties.MSA_ID === "33860")
         // console.log(this.tractGeoJSON)
@@ -61,14 +65,14 @@ class TractMap {
         this.tip = d3Tip()
             .attr('class', 'd3-tip')
             .html((d) => {   
-                const tractData = d.properties;
-                const commuterPct = tractData.main_city_commuters / tractData.total_commuters;
-                
+                const cityData = d.properties;
+                // const commuterPct = tractData.main_city_commuters / tractData.total_commuters;
+
+                // <div>% Commuters to ${tractData.MSA}: ${d3.format(".1%")(commuterPct)}</div>
+                // <div>Tract: ${tractData.GEOID}</div>
                 return (
                     `<div class="d3-tip__grid">
-                        <div>Tract: ${tractData.GEOID}</div>
-                        <div>City: ${tractData.CITY}</div>
-                        <div>% Commuters to ${tractData.MSA}: ${d3.format(".1%")(commuterPct)}</div>
+                        <div>${cityData.PLACE_NAME}, ${cityData.STATE_ABBREVIATION}</div>
                     </div>`
                 )
             });
@@ -82,7 +86,6 @@ class TractMap {
 
         let path = d3.geoPath()
             .projection(projection);
-
         
         pathGroup
             .selectAll("path")
@@ -93,20 +96,29 @@ class TractMap {
                     .attr("class", `${mapType}-path`)
                     .style("opacity", 1.0)
                     // .style('stroke-width', mapType === "state" ? 0.5 : 0)
-                    // .style("stroke", "black")
-                    // .style("stroke-width", 0.1)
+                    .style("stroke", "black")
+                    // .style("stroke-width", mapType === "tract" ? 0 : 0.5)
+                    .style("stroke-width", 0)
                     .style("fill-opacity", d => {
-                        if (mapType === "state") {
+                        if (mapType !== "tract") {
                             return 0;
                         }
                         return d.properties.total_commuters > 0 ? 1.0*d.properties.main_city_commuters / d.properties.total_commuters : 0.0;
                     })
-                    // .on("mouseover", function(e, d) {
-                    //     vis.tip.show(d, this);
-                    // })
-                    // .on("mouseout", () => {
-                    //     vis.tip.hide();
-                    // })
+                    .on("mouseover", function(e, d) {
+                        // console.log(d)
+                        if (mapType === "cities") {
+                            d3.select(this).style("stroke-width", 1)
+                            vis.tip.show(d, this);
+
+                        }
+                    })
+                    .on("mouseout", function(e, d) {
+                        if (mapType === "cities") {
+                            d3.select(this).style("stroke-width", 0)
+                            vis.tip.hide();
+                        }
+                    })
                     .style("fill", d => {
                         if (mapType === "state") {
                             return "white";
@@ -129,7 +141,11 @@ class TractMap {
         const projection = d3.geoAlbersUsa()
             .fitExtent([[25, 25], [vis.width-25, vis.height-25]], cityTracts);
         
+        const msaCitiesFeatures = vis.cityGeoJSON.features.filter(city => city.properties.MSA_ID === MSA_ID);
+        const msaCities = { type: "FeatureCollecton", features: msaCitiesFeatures};
+
         this.generateMap({ geoJSON: cityTracts, projection, pathGroup: vis.tractGroup, mapType: "tract" });
+        this.generateMap({ geoJSON: msaCities, projection, pathGroup: vis.cityGroup, mapType: "cities" })
     }
 
 }

@@ -9,7 +9,7 @@ import TractMap from '../d3-components/TractMap';
 
 let vis;
 
-const MapWrapper = ({ tractGeo, MsaCityMappings, stateGeo }) => {
+const MapWrapper = ({ tractGeo, MsaCityMappings, stateGeo, cityBoundaries }) => {
 
     const [featuredCity, setFeaturedCity] = useState("35620")
     const [largestCityDisplay, setLargestCityDisplay] = useState("New York City")
@@ -17,7 +17,7 @@ const MapWrapper = ({ tractGeo, MsaCityMappings, stateGeo }) => {
     const refElement = useRef(null);
 
     useEffect(() => {
-        vis = new TractMap(refElement.current, { width: 1400, height: 800, tractGeo, stateGeo });
+        vis = new TractMap(refElement.current, { width: 1400, height: 800, tractGeo, stateGeo, cityBoundaries });
     }, [])
 
     useEffect(() => {
