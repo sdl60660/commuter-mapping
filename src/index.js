@@ -33,7 +33,8 @@ const promises = [
   json("data/simplified_tract_data.json"),
   csv("data/msa_largest_cities.csv"),
   json("data/us_states.json"),
-  json("data/places.json")
+  json("data/places.json"),
+  json("data/MCDs.json")
 ];
 
 // Render React components (and inner d3 viz) on data load
@@ -43,7 +44,7 @@ Promise.all(promises).then((allData) => {
     <div>
       <Header />
       <Intro />
-      <MapWrapper tractGeo={allData[0]} MsaCityMappings={allData[1]} stateGeo={allData[2]} cityBoundaries={allData[3]}/>
+      <MapWrapper tractGeo={allData[0]} MsaCityMappings={allData[1]} stateGeo={allData[2]} cityBoundaries={allData[3]} MCDBoundaries={allData[4]}/>
       <Footer githubLink={"https://github.com/sdl60660/commuter-mapping"} />
     </div>,
     document.getElementById('root')

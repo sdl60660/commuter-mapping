@@ -24,7 +24,7 @@ class TractMap {
 
     constructor(containerEl, props) {
         this.containerEl = containerEl;
-        const { width, height, tractGeo, stateGeo, cityBoundaries, featuredCity, largestCityDisplay } = props;
+        const { width, height, tractGeo, stateGeo, cityBoundaries, MCDBoundaries, featuredCity, largestCityDisplay } = props;
 
         this.width = width;
         this.height = height;
@@ -34,21 +34,29 @@ class TractMap {
             .append("svg")
             .attr("viewBox", [0, 0, width, height]);
         
+        // Tract layer will be on the bottom, but will be the only visible layer
         this.tractGroup = this.svg.append("g")
             .attr("class", "map-paths tract-map");
-            // selectAll("path");
 
+        // County subdivision (or MCD/CCD) layer goes under that, these are invisible, only triggering on mouseover,
+        // but are under the places/cities layer, so mouseover will only trigger if on an area without census-designated place
+        this.countySubdivisionGroup = this.svg.append("g")
+            .attr("class", "map-paths mcd-map");
+
+        // Finally, city layer goes on top, with polygons that are invisible, but with outline/tooltip on mouseover
         this.cityGroup = this.svg.append("g")
             .attr("class", "map-paths city-boundary-map");
 
         this.stateGroup = this.svg.append("g")
             .attr("class", "map-paths state-map");
-            // .selectAll("path");
         
         // Generate background map and projection
         this.tractGeoJSON = topojson.feature(tractGeo, tractGeo.objects["tracts_with_commuter_data"]);
         this.stateGeoJSON = topojson.feature(stateGeo, stateGeo.objects.states);
-        this.cityGeoJSON = topojson.feature(cityBoundaries, cityBoundaries.objects.places)
+        this.cityGeoJSON = topojson.feature(cityBoundaries, cityBoundaries.objects.places);
+        this.mcdGeoJSON = topojson.feature(MCDBoundaries, MCDBoundaries.objects.MCDs);
+
+        console.log(this.mcdGeoJSON);
         
         const projection = d3.geoAlbersUsa()
             .fitExtent([[0, 0], [width, height]], this.tractGeoJSON);
@@ -138,13 +146,14 @@ class TractMap {
             .attr('class', 'd3-tip')
             .html((d) => {   
                 const cityData = d.properties;
+                console.log(cityData);
                 // const commuterPct = tractData.main_city_commuters / tractData.total_commuters;
 
                 // <div>% Commuters to ${tractData.MSA}: ${d3.format(".1%")(commuterPct)}</div>
                 // <div>Tract: ${tractData.GEOID}</div>
                 return (
                     `<div class="d3-tip__grid">
-                        <div class="d3-tip__header">${cityData.PLACE_NAME}, ${cityData.STATE_ABBREVIATION}</div>
+                        <div class="d3-tip__header">${cityData.PLACE_NAME ? cityData.PLACE_NAME : cityData.MCD_NAME}, ${cityData.STATE_ABBREVIATION}<span class="mcd-callout">${cityData.MCD_NAME ? " (MCD)" : ""}</span></div>
                         <div>Job location in ${this.largestCityDisplay}: ${getCommuterVal(cityData)}</div>
                     </div>`
                 )
@@ -180,14 +189,14 @@ class TractMap {
                     })
                     .on("mouseover", function(e, d) {
                         // console.log(d)
-                        if (mapType === "cities") {
+                        if (mapType !== "tract") {
                             d3.select(this).style("stroke-width", 1)
                             vis.tip.show(d, this);
 
                         }
                     })
                     .on("mouseout", function(e, d) {
-                        if (mapType === "cities") {
+                        if (mapType !== "tract") {
                             d3.select(this).style("stroke-width", 0)
                             vis.tip.hide();
                         }
@@ -210,6 +219,7 @@ class TractMap {
 
         const cityTracts = filterGeoJSON({ originalGeoJSON: vis.tractGeoJSON, MSA_ID });
         const msaCities = filterGeoJSON({ originalGeoJSON: vis.cityGeoJSON, MSA_ID })
+        const msaMCDs = filterGeoJSON({ originalGeoJSON: this.mcdGeoJSON, MSA_ID })
 
         const projection = d3.geoAlbersUsa()
             .fitExtent([[0, 0], [vis.width, vis.height]], cityTracts);
@@ -217,7 +227,8 @@ class TractMap {
         // console.log(msaCitiesFeatures);
 
         this.generateMap({ geoJSON: cityTracts, projection, pathGroup: vis.tractGroup, mapType: "tract" });
-        this.generateMap({ geoJSON: msaCities, projection, pathGroup: vis.cityGroup, mapType: "cities" })
+        this.generateMap({ geoJSON: msaCities, projection, pathGroup: vis.cityGroup, mapType: "cities" });
+        this.generateMap({ geoJSON: msaMCDs, projection, pathGroup: vis.countySubdivisionGroup, mapType: "county-subdivisions" })
     }
 
 }

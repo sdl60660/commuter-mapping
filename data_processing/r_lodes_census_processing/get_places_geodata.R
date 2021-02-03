@@ -19,7 +19,7 @@ place_centroids <- st_centroid(places) %>%
 msa_geo <- core_based_statistical_areas(cb = TRUE, resolution = "500k", year= 2018)
 
 
-# Spatial join tract centroids with MSAs
+# Spatial join place centroids with MSAs
 places_with_msas <- st_join(place_centroids, msa_geo, type = st_intersects) %>%
   rename( 
     MSA_ID = CBSA
@@ -46,5 +46,20 @@ all_place_data <- left_join(place_data_with_msa, state_data, by = c("STATE_ID" =
   select(GEOID, PLACE_NAME, MSA_ID, STATE_ID, STATE_NAME, STATE_ABBREVIATION, geometry) %>%
   filter(MSA_ID != "")
 
+
+# Get tract data, spatial join by tract centroid within places, group by place and sum commuter numbers
+tract_geos <- st_read('../data/tracts_with_commuter_data.geojson')
+tract_centroids <- st_centroid(tract_geos)
+tracts_with_places <- st_join(tract_centroids, all_place_data, type = st_intersects) %>%
+  rename(
+  ) %>%
+  filter (CITY != "") %>%
+  st_drop_geometry() %>%
+  group_by(CITY_ID) %>%
+  summarize(total_commuters = sum(total_commuters), main_city_commuters = sum(main_city_commuters))
+
+
+final_place_data <- left_join(all_place_data, tracts_with_places, by=c("GEOID" = "CITY_ID"))
+
 # Write tract data to geojson
-st_write(all_place_data, '../data/places.geojson')
+st_write(final_place_data, '../data/places.geojson')
