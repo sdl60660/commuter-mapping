@@ -19,11 +19,12 @@ const MapWrapper = ({ tractGeo, MsaCityMappings, stateGeo, cityBoundaries }) => 
     const refElement = useRef(null);
 
     useEffect(() => {
-        vis = new TractMap(refElement.current, { width: 1000, height: 800, tractGeo, stateGeo, cityBoundaries });
+        vis = new TractMap(refElement.current, { width: 1000, height: 800, tractGeo, stateGeo, cityBoundaries, featuredCity, largestCityDisplay });
     }, [])
 
     useEffect(() => {
         vis.renderCity({ MSA_ID: featuredCity })
+        vis.largestCityDisplay = largestCityDisplay;
     }, [featuredCity])
 
     return (

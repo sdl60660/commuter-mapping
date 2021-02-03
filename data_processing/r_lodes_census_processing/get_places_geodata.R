@@ -16,7 +16,7 @@ place_centroids <- st_centroid(places) %>%
 
 
 # Get MSA geo data
-msa_geo <- core_based_statistical_areas(cb = TRUE, resolution = "500k", year= 2011)
+msa_geo <- core_based_statistical_areas(cb = TRUE, resolution = "500k", year= 2018)
 
 
 # Spatial join tract centroids with MSAs
