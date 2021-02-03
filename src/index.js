@@ -39,7 +39,6 @@ const promises = [
 
 // Render React components (and inner d3 viz) on data load
 Promise.all(promises).then((allData) => {
-
   ReactDOM.render(
     <div>
       <Header />

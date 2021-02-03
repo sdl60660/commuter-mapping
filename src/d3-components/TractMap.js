@@ -53,8 +53,11 @@ class TractMap {
         // Generate background map and projection
         this.tractGeoJSON = topojson.feature(tractGeo, tractGeo.objects["tracts_with_commuter_data"]);
         this.stateGeoJSON = topojson.feature(stateGeo, stateGeo.objects.states);
-        this.cityGeoJSON = topojson.feature(cityBoundaries, cityBoundaries.objects.places);
+        this.cityGeoJSON = topojson.feature(cityBoundaries, cityBoundaries.objects.places)
         this.mcdGeoJSON = topojson.feature(MCDBoundaries, MCDBoundaries.objects.MCDs);
+
+        // Specifically filter out the NYC place polygon, since the MCD data has more detailed data (boroughs). This isn't the case anywhere else.
+        this.cityGeoJSON.features = this.cityGeoJSON.features.filter(place => place.properties.GEOID !== "3651000");
 
         console.log(this.mcdGeoJSON);
         
@@ -218,8 +221,8 @@ class TractMap {
         const vis = this;
 
         const cityTracts = filterGeoJSON({ originalGeoJSON: vis.tractGeoJSON, MSA_ID });
-        const msaCities = filterGeoJSON({ originalGeoJSON: vis.cityGeoJSON, MSA_ID })
-        const msaMCDs = filterGeoJSON({ originalGeoJSON: this.mcdGeoJSON, MSA_ID })
+        const msaCities = filterGeoJSON({ originalGeoJSON: vis.cityGeoJSON, MSA_ID });
+        const msaMCDs = filterGeoJSON({ originalGeoJSON: this.mcdGeoJSON, MSA_ID });
 
         const projection = d3.geoAlbersUsa()
             .fitExtent([[0, 0], [vis.width, vis.height]], cityTracts);
@@ -228,7 +231,7 @@ class TractMap {
 
         this.generateMap({ geoJSON: cityTracts, projection, pathGroup: vis.tractGroup, mapType: "tract" });
         this.generateMap({ geoJSON: msaCities, projection, pathGroup: vis.cityGroup, mapType: "cities" });
-        this.generateMap({ geoJSON: msaMCDs, projection, pathGroup: vis.countySubdivisionGroup, mapType: "county-subdivisions" })
+        this.generateMap({ geoJSON: msaMCDs, projection, pathGroup: vis.countySubdivisionGroup, mapType: "county-subdivisions" });
     }
 
 }
