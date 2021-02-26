@@ -6,9 +6,17 @@
     z-index: 10;
     padding: $xs-size;
     border-radius: 5px;
-    right: $m-size;
-    margin-top: $xl-size;
     background-color: rgba(255, 255, 255, 0.6);
+    
+    right: $xl-size;
+    margin-top: $xl-size;
+
+    @media screen and (max-width: $mobile-breakpoint) {
+        right: 50%;
+        transform: translateX(50%);
+        margin: $xl-size auto;
+    }
+    
 }
 
 .legend__rect {
