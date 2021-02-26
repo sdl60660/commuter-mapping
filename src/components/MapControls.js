@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Select from 'react-select';
+import { MapContext } from '../MapContext';
+
 
 
 const MapControls = ({ setCity, cityData, setCityDisplay }) => {
+
+    const { setFeaturedCity, setLargestCityDisplay } = useContext(MapContext)
 
     const options = cityData.map(msa => {
                         return ({
@@ -14,8 +18,8 @@ const MapControls = ({ setCity, cityData, setCityDisplay }) => {
                     .sort((a, b) => (a.label < b.label) ? -1 : (a.label > b.label) ? 1 : 0)
 
     const onChange = (option) => {
-        setCity(option.value);
-        setCityDisplay(option.display_city);
+        setFeaturedCity(option.value);
+        setLargestCityDisplay(option.display_city);
     }
 
     return (

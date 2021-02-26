@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 
 // Outside Libraries
 import { json, csv } from 'd3-fetch';
+import * as topojson from "topojson-client";
+
 
 // Styles
 import './styles/styles.scss';
@@ -28,6 +30,15 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
+const addCommuterRates = (rawGeoJson) => {
+  rawGeoJson.features.forEach(feature => {
+    feature.properties.commuter_rate = 1.0*feature.properties.main_city_commuters/feature.properties.total_commuters;
+    return feature;
+  });
+
+  return rawGeoJson;
+}
+
 // Begin loading datafiles
 const promises = [
   json("data/simplified_tract_data.json"),
@@ -39,11 +50,22 @@ const promises = [
 
 // Render React components (and inner d3 viz) on data load
 Promise.all(promises).then((allData) => {
+
+  let tractGeoJSON = addCommuterRates(topojson.feature(allData[0], allData[0].objects["tracts_with_commuter_data"]));
+  let stateGeoJSON = topojson.feature(allData[2], allData[2].objects.states);
+  let cityGeoJSON = addCommuterRates(topojson.feature(allData[3], allData[3].objects.places));
+  let mcdGeoJSON = addCommuterRates(topojson.feature(allData[4], allData[4].objects.MCDs));
+
+  // Specifically filter out the NYC place polygon, since the MCD data has more detailed data (boroughs). This isn't the case anywhere else.
+  cityGeoJSON.features = cityGeoJSON.features.filter(place => place.properties.GEOID !== "3651000");
+
+  console.log(tractGeoJSON);
+
   ReactDOM.render(
     <div>
       <Header />
       <Intro />
-      <MapWrapper tractGeo={allData[0]} MsaCityMappings={allData[1]} stateGeo={allData[2]} cityBoundaries={allData[3]} MCDBoundaries={allData[4]}/>
+      <MapWrapper tractGeo={tractGeoJSON} MsaCityMappings={allData[1]} stateGeo={stateGeoJSON} cityBoundaries={cityGeoJSON} MCDBoundaries={mcdGeoJSON}/>
       <Footer githubLink={"https://github.com/sdl60660/commuter-mapping"} />
     </div>,
     document.getElementById('root')

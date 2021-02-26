@@ -1,8 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import * as d3 from 'd3';
+import * as chromatic from "d3-scale-chromatic";
+import { MapContext } from '../MapContext';
 
 
-const MapLegend = ({ cityName, gradientcolor }) => {
+const MapLegend = () => {
+    const { featuredCity, largestCityDisplay } = useContext(MapContext)
+
+    const gradientColor = chromatic.schemeCategory10[Math.round(parseInt(featuredCity) / 72) % 10]
+    
+
     const rectHeight = 20;
     const rectWidth = 300;
     const xMargin = 15;
@@ -34,11 +41,11 @@ const MapLegend = ({ cityName, gradientcolor }) => {
                 <defs>
                     <linearGradient className="legend__gradient" id={"gradient"}>
                         <stop offset="0%" stopColor="#FFFFFF" />
-                        <stop offset="100%" stopColor={gradientcolor} />
+                        <stop offset="100%" stopColor={gradientColor} />
                     </linearGradient>
                 </defs>
             </svg>
-            <div className={"legend__message"}>Tract residents working in {cityName} (%)</div>
+            <div className={"legend__message"}>Tract residents working in {largestCityDisplay} (%)</div>
         </div>
     )
 }

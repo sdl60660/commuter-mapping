@@ -5,16 +5,12 @@ import { tile } from 'd3-tile';
 import * as chromatic from "d3-scale-chromatic";
 import * as topojson from "topojson-client";
 
+import { filterGeoJSON } from '../utils.js';
+
 
 const url = (x, y, z) => `https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/${z}/${x}/${y}${devicePixelRatio > 1 ?
     "@2x" :
     ""}?access_token=pk.eyJ1Ijoic2FtbGVhcm5lciIsImEiOiJja2IzNTFsZXMwaG44MzRsbWplbGNtNHo0In0.BmjC6OX6egwKdm0fAmN_Nw`
-
-
-const filterGeoJSON = ({ originalGeoJSON, MSA_ID }) => {
-    const selectedFeatures = originalGeoJSON.features.filter(feature => feature.properties.MSA_ID === MSA_ID)
-    return { type: "FeatureCollection", features: selectedFeatures };
-}
 
 
 class TractMap {
@@ -51,10 +47,10 @@ class TractMap {
             .attr("class", "map-paths state-map");
         
         // Generate background map and projection
-        this.tractGeoJSON = topojson.feature(tractGeo, tractGeo.objects["tracts_with_commuter_data"]);
-        this.stateGeoJSON = topojson.feature(stateGeo, stateGeo.objects.states);
-        this.cityGeoJSON = topojson.feature(cityBoundaries, cityBoundaries.objects.places)
-        this.mcdGeoJSON = topojson.feature(MCDBoundaries, MCDBoundaries.objects.MCDs);
+        this.tractGeoJSON = tractGeo;
+        this.stateGeoJSON = stateGeo;
+        this.cityGeoJSON = cityBoundaries;
+        this.mcdGeoJSON = MCDBoundaries;
 
         // Specifically filter out the NYC place polygon, since the MCD data has more detailed data (boroughs). This isn't the case anywhere else.
         this.cityGeoJSON.features = this.cityGeoJSON.features.filter(place => place.properties.GEOID !== "3651000");
@@ -97,33 +93,20 @@ class TractMap {
             .translateExtent([[0, 0], [this.width, this.height]])
             .on("zoom", ({transform}) => zoomed(transform));
         
+        const initialTracts = filterGeoJSON({ originalGeoJSON: this.tractGeoJSON, MSA_ID: featuredCity });
         const initialScale = 1 << 12
-        const initialCenter = d3.geoCentroid(filterGeoJSON({ originalGeoJSON: this.tractGeoJSON, MSA_ID: featuredCity }))
-        // const initialCenter = [0, 0];
+        const initialCenter = d3.geoCentroid(initialTracts)
+        const initialBounds = d3.geoBounds(initialTracts);
+
         console.log(initialCenter, initialScale);
         console.log(projection(initialCenter));
+        console.log(initialBounds);
+
         this.svg.call(zoom)
-                // .call(zoom.transform, d3.zoomIdentity
-                //     .translate(width / 2, height / 2)
-                //     .scale(-initialScale)
-                //     .translate(...projection(initialCenter))
-                //     .scale(-1));
-            // .on("wheel.zoom", null)
-            // .on("wheel", event => event.preventDefault());
-        
-        // console.log(mapTile);
+
 
         this.setScales();
         this.initTooltip();
-
-        // this.tractGeoJSON.features = this.tractGeoJSON.features.filter(feature => feature.properties.MSA_ID === "33860")
-        // console.log(this.tractGeoJSON)
-        
-        // this.generateMap({ geoJSON: this.stateGeoJSON, projection, pathGroup: this.stateGroup, mapType: "state" });
-        // this.generateMap({ geoJSON: this.tractGeoJSON, projection, pathGroup: this.tractGroup, mapType: "tract" });
-
-        // this.zoom = d3.zoom().on("zoom", zoomed);
-        // this.selection.call(.on("zoom", zoomed));
         
     }
 
@@ -224,6 +207,8 @@ class TractMap {
         const msaCities = filterGeoJSON({ originalGeoJSON: vis.cityGeoJSON, MSA_ID });
         const msaMCDs = filterGeoJSON({ originalGeoJSON: this.mcdGeoJSON, MSA_ID });
 
+        console.log(d3.geoBounds(cityTracts));
+
         const projection = d3.geoAlbersUsa()
             .fitExtent([[0, 0], [vis.width, vis.height]], cityTracts);
 
@@ -237,27 +222,3 @@ class TractMap {
 }
 
 export default TractMap;
-
-
-// "properties": {
-//     "GEOID": "01001020100",
-//     "MSA": "Montgomery, AL",
-//     "MSA_ID": "33860",
-//     "CITY": "Prattville",
-//     "CITY_ID": "0162328",
-//     "STATE_ID": "01",
-//     "COUNTY_ID": "001",
-//     "total_commuters": 689,
-//     "main_city_commuters": 283
-//   }
-
-
-// .style("fill-opacity", mapType === "state" ? 0 : 1)
-// .style("fill", d => {
-//     if (mapType === "state") {
-//         return "white";
-//     }
-//     const scaleIndex = Math.round((parseInt(d.properties.MSA_ID) / 53)) % 10
-//     const mainCityCommuterPct = d.properties.total_commuters > 0 ? 1.0*d.properties.main_city_commuters / d.properties.total_commuters : 0.0;
-//     return this.colorScales[scaleIndex](mainCityCommuterPct)
-// })

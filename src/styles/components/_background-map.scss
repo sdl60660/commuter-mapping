@@ -1,0 +1,26 @@
+.map-container {
+    // position: absolute;
+    // top: 0;
+    width: 100%;
+    height: 80vh;
+    // right: 0;
+    // left: 0;
+    // bottom: 0;
+}
+
+.mapboxgl-control-container {
+    display: none;
+    height: 0;
+}
+
+.mapboxgl-popup {
+    font-size: 1rem;
+    font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    background-color: white;
+    padding: 1.5rem;
+    max-width: unset !important;
+    opacity: 0.9;
+    border-radius: 3px;
+    border: 1px solid black;
+    z-index: 15;
+}

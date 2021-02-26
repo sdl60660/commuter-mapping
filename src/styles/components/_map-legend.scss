@@ -1,7 +1,14 @@
 
 .legend {
     max-width: 30rem;
-    margin: $m-size auto 0 auto;
+    // margin: $m-size $xl-size 0 auto;
+    position: absolute;
+    z-index: 10;
+    padding: $xs-size;
+    border-radius: 5px;
+    right: $m-size;
+    margin-top: $xl-size;
+    background-color: rgba(255, 255, 255, 0.6);
 }
 
 .legend__rect {
