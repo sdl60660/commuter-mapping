@@ -1,6 +1,8 @@
 
 import React, { useRef, useEffect, useState, useContext } from 'react';
-import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
+import mapboxgl from 'mapbox-gl/dist/mapbox-gl-csp';
+// eslint-disable-next-line
+import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker';
 import * as chromatic from "d3-scale-chromatic";
 import * as d3 from 'd3';
 
@@ -8,6 +10,7 @@ import { filterGeoJSON } from '../utils.js';
 import { MapContext } from '../MapContext';
 
 
+mapboxgl.workerClass = MapboxWorker;
 mapboxgl.accessToken = 'pk.eyJ1Ijoic2FtbGVhcm5lciIsImEiOiJja2IzNTFsZXMwaG44MzRsbWplbGNtNHo0In0.BmjC6OX6egwKdm0fAmN_Nw';
 let hoverIds = {
     cities: [],
