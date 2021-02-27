@@ -9,6 +9,10 @@
     // bottom: 0;
 }
 
+.mapboxgl-canvas:focus {
+    outline:0;
+}
+
 .mapboxgl-control-container {
     display: none;
     height: 0;
