@@ -2,4 +2,4 @@
 
 Mapping commuter rates from metro area census tracts.
 
-Live project (early WIP) is here: https://commuter-mapping.herokuapp.com/
+Live project (early WIP) is here: https://commuter-mapping.samlearner.com/
