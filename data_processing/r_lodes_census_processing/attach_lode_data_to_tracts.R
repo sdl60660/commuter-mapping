@@ -8,9 +8,9 @@ options(tigris_use_cache = TRUE)
 
 
 # Load lodes commuter data, as well as MSA/largest city mapping and tract data (with geography, city, MSA)
-lodes_data <- read_csv('../data/2010_lodes_data.csv')
+lodes_data <- read_csv('../data/lodes_data.csv')
 msa_city_dict <- read_csv('../data/msa_largest_cities.csv')
-tract_data <- st_read('../data/2010_full_tract_data.geojson')
+tract_data <- st_read('../data/full_tract_data.geojson')
 
 # Join city/MSA tract data to lodes tracts
 no_geo_tract_data <- st_drop_geometry(tract_data)
@@ -64,10 +64,10 @@ us_tracts <- map_dfr(tract_data$GEOID, function(tract) {
 })
 
 # Write tract commuter data to CSV
-write_csv(us_tracts, '../data/2010_tract_commuter_totals.csv')
+write_csv(us_tracts, '../data/tract_commuter_totals.csv')
 
 # Join tract commuter data to existing tract geoJSON and save it
 commuter_geojson <- left_join(tract_data, us_tracts, by = c("GEOID" = "tract_id"))
-st_write(commuter_geojson, '../data/2010_tracts_with_commuter_data.geojson')
+st_write(commuter_geojson, '../data/tracts_with_commuter_data.geojson')
 
 

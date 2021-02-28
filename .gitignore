@@ -35,6 +35,10 @@ data_processing/data/full_tract_data.geojson
 data_processing/data/us_tracts.geojson
 data_processing/data/lodes_data.csv
 data_processing/data/tracts_with_commuter_data.geojson
+data_processing/data/2011_tracts_with_commuter_data.geojson
 data_processing/data/2011_lodes_data.csv
+data_processing/data/combined_tracts_with_commuter_data.geojson
 data_processing/data/MCDs.geojson
+data_processing/data/2018_MCDs.geojson
+data_processing/data/2018_places.geojson
 data_processing/data/precincts-with-results.geojson

@@ -49,7 +49,8 @@ all_MCD_data <- left_join(MCD_data_with_msa, state_data, by = c("STATE_ID" = "GE
 
 
 # Get tract data, spatial join by tract centroid within places, group by place and sum commuter numbers
-tract_geos <- st_read('../data/tracts_with_commuter_data.geojson')
+# tract_geos <- st_read('../data/tracts_with_commuter_data.geojson')
+tract_geos <- st_read('../data/combined_tracts_with_commuter_data.geojson')
 tract_centroids <- st_centroid(tract_geos)
 tracts_with_MCDs <- st_join(tract_centroids, all_MCD_data, type = st_intersects) %>%
   rename(
@@ -58,7 +59,13 @@ tracts_with_MCDs <- st_join(tract_centroids, all_MCD_data, type = st_intersects)
   filter (MCD_NAME != "") %>%
   st_drop_geometry() %>%
   group_by(MCD_ID) %>%
-  summarize(total_commuters = sum(total_commuters), main_city_commuters = sum(main_city_commuters))
+  # summarize(total_commuters = sum(total_commuters), main_city_commuters = sum(main_city_commuters))
+  summarize(
+    total_commuters = sum(total_commuters),
+    main_city_commuters = sum(main_city_commuters),
+    total_commuters_2011 = sum(total_commuters_2011),
+    main_city_commuters_2011 = sum(main_city_commuters_2011)
+  )
 
 
 final_MCD_data <- left_join(all_MCD_data, tracts_with_MCDs, by=c("GEOID" = "MCD_ID"))
