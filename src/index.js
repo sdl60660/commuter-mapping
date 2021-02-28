@@ -51,7 +51,7 @@ const promises = [
 // Render React components (and inner d3 viz) on data load
 Promise.all(promises).then((allData) => {
 
-  let tractGeoJSON = addCommuterRates(topojson.feature(allData[0], allData[0].objects["tracts_with_commuter_data"]));
+  let tractGeoJSON = addCommuterRates(topojson.feature(allData[0], allData[0].objects["combined_tracts_with_commuter_data"]));
   let stateGeoJSON = topojson.feature(allData[2], allData[2].objects.states);
   let cityGeoJSON = addCommuterRates(topojson.feature(allData[3], allData[3].objects.places));
   let mcdGeoJSON = addCommuterRates(topojson.feature(allData[4], allData[4].objects.MCDs));
