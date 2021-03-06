@@ -3,8 +3,7 @@ import Select from 'react-select';
 import { MapContext } from '../MapContext';
 
 
-
-const MapControls = ({ setCity, cityData, setCityDisplay }) => {
+const MapControls = ({ cityData }) => {
 
     const { setFeaturedCity, setLargestCityDisplay } = useContext(MapContext)
 

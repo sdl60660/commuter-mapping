@@ -38,7 +38,7 @@ const addTractLayer = ({ map, featuredTracts, featuredCity }) => {
         'layout': {},
         'paint': {
             'fill-color': {
-                property: 'commuter_rate',
+                property: 'outside_msa_commuter_rate_2018',
                 stops: [[0, '#fff'], [1, stopColor]]
             },
             'fill-opacity': 0.7
@@ -103,7 +103,7 @@ const addHoverLayer = ({ map, geoData, largestCityDisplay, layerId, nameAccessor
                 .setLngLat(e.lngLat)
                 .setHTML(`  <strong>${featureProps[nameAccessor]}, ${featureProps.STATE_ABBREVIATION}${layerId === "MCDs" ? " (MCD)" : ""}</strong>
                             <br>
-                            <div>Job Location in ${largestCityDisplay}: ${featureProps.commuter_rate === "null" ? "N/A" : d3.format(".1%")(featureProps.commuter_rate)}</div>`)
+                            <div>Job Location in ${largestCityDisplay}: ${featureProps.city_commuter_rate_2018 === "null" ? "N/A" : d3.format(".1%")(featureProps.city_commuter_rate_2018)}</div>`)
                 .addTo(map);
             
             const element = popup.getElement();

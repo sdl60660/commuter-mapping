@@ -1,0 +1,79 @@
+
+.stacked-bar-chart-tile {
+    width: 90vw;
+    margin: 2rem auto 0 auto;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    justify-content: center;
+}
+
+.stacked-bar-chart {
+    justify-self: center;
+    // width: 100%;
+    // height: 35px;
+    // display: grid;
+    // grid-template-columns: 22rem 1fr;
+    margin-bottom: 0.5rem;
+}
+
+.stacked-bar__label {
+    font-size: 0.9rem;
+}
+
+.stacked-bar-chart__header {
+    margin: auto;
+}
+
+// .stacked-bar-chart__label {
+//     padding: 1rem;
+//     align-self: center;
+//     justify-self: right;
+//     font-size: 0.8rem;
+// }
+
+.stacked-bar-chart div {
+    // height: 45px;
+}
+
+.stacked-bar__svg {
+    // min-width: 90%;
+    // max-height: 100%;
+}
+
+.stacked-bar-chart__control-grid {
+    margin: 0 auto;
+    display: grid;
+    column-gap: 1rem;
+    grid-template-columns: repeat(3, 20rem);
+}
+
+.stacked-bar-chart__sort-grid {
+    margin-top: 2rem;
+    margin-left: 140px;
+    max-width: 760px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+}
+
+.stacked-bar-chart__control {
+    
+}
+
+.stacked-bar-chart__sort-by {
+    cursor: pointer;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.stacked-bar-chart__sort-by#city {
+    color: rgb(31, 119, 180);
+}
+
+.stacked-bar-chart__sort-by#suburban {
+    color: rgb(255, 127, 14);
+}
+
+.stacked-bar-chart__sort-by#outside-msa {
+    color: rgb(44, 160, 44);
+}

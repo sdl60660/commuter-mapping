@@ -1,14 +1,12 @@
 library(tigris)
-library(tidycensus)
 library(tidyverse)
-library(purrr)
 library(sf)
 library(rgeos)
 options(tigris_use_cache = TRUE)
 
 
 # Load lodes commuter data, as well as MSA/largest city mapping and tract data (with geography, city, MSA)
-lodes_data <- read_csv('../data/lodes_data.csv')
+lodes_data <- read_csv('../data/2011_lodes_data.csv')
 msa_city_dict <- read_csv('../data/msa_largest_cities.csv')
 tract_data <- st_read('../data/full_tract_data.geojson')
 
@@ -49,25 +47,36 @@ us_tracts <- map_dfr(tract_data$GEOID, function(tract) {
   total_commuters <- sum(subset$total_commuters)
   # print(total_commuters)
   
+  # Get total commuters from the tract to the tract's largest city
   main_city_commuters_subset <- filter(subset, w_CITY == largest_MSA_city)
   main_city_commuters <- sum(main_city_commuters_subset$total_commuters)
   # print(main_city_commuters)
+  
+  # Get commuters from tract to tracts in the MSA, but not in major city ("suburban")
+  suburban_commuters_subset <- filter(subset, w_MSA == h_MSA & (is.na(w_CITY) | w_CITY != largest_MSA_city))
+  suburban_commuters <- sum(suburban_commuters_subset$total_commuters)
+  
+  # Get commuters from tract to tracts outside of the MSA ("outside msa")
+  outside_msa_subset <- filter(subset, w_MSA != h_MSA | is.na(w_MSA))
+  outside_msa_commuters <- sum(outside_msa_subset$total_commuters)
   
   # print(sum(subset[subset$w_CITY == subset$largest_MSA_city,]$total_commuters))
   output_df <- tibble(
                   tract_id = tract, 
                   total_commuters = total_commuters,
-                  main_city_commuters = main_city_commuters
+                  main_city_commuters = main_city_commuters,
+                  suburban_commuters = suburban_commuters,
+                  outside_msa_commuters = outside_msa_commuters
                 )
   # print(output_df)
   return(output_df)
 })
 
 # Write tract commuter data to CSV
-write_csv(us_tracts, '../data/tract_commuter_totals.csv')
+write_csv(us_tracts, '../data/2011_tract_commuter_totals.csv')
 
 # Join tract commuter data to existing tract geoJSON and save it
 commuter_geojson <- left_join(tract_data, us_tracts, by = c("GEOID" = "tract_id"))
-st_write(commuter_geojson, '../data/tracts_with_commuter_data.geojson')
+st_write(commuter_geojson, '../data/2011_tracts_with_commuter_data.geojson')
 
 

@@ -61,10 +61,22 @@ tracts_with_MCDs <- st_join(tract_centroids, all_MCD_data, type = st_intersects)
   group_by(MCD_ID) %>%
   # summarize(total_commuters = sum(total_commuters), main_city_commuters = sum(main_city_commuters))
   summarize(
-    total_commuters = sum(total_commuters),
-    main_city_commuters = sum(main_city_commuters),
-    total_commuters_2011 = sum(total_commuters_2011),
-    main_city_commuters_2011 = sum(main_city_commuters_2011)
+    total_commuters=sum(total_commuters), 
+    main_city_commuters=sum(main_city_commuters),
+    suburban_commuters=sum(suburban_commuters),
+    outside_msa_commuters=sum(outside_msa_commuters),
+    total_commuters_2011=sum(total_commuters_2011),
+    main_city_commuters_2011=sum(main_city_commuters_2011),
+    suburban_commuters_2011=sum(suburban_commuters_2011),
+    outside_msa_commuters_2011=sum(outside_msa_commuters_2011)
+  ) %>%
+  mutate(
+    city_commuter_rate_2018 = main_city_commuters/total_commuters,
+    city_commuter_rate_2011 = main_city_commuters_2011/total_commuters_2011,
+    suburban_commuter_rate_2018 = suburban_commuters/total_commuters,
+    suburban_commuter_rate_2011 = suburban_commuters_2011/total_commuters_2011,
+    outside_msa_commuter_rate_2018 = outside_msa_commuters/total_commuters,
+    outside_msa_commuter_rate_2011 = outside_msa_commuters_2011/total_commuters_2011
   )
 
 

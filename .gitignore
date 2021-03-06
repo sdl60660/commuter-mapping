@@ -41,4 +41,6 @@ data_processing/data/combined_tracts_with_commuter_data.geojson
 data_processing/data/MCDs.geojson
 data_processing/data/2018_MCDs.geojson
 data_processing/data/2018_places.geojson
+data_processing/data/places.geojson
+data_processing/data/simplified_tract_data.json
 data_processing/data/precincts-with-results.geojson

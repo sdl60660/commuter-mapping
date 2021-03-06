@@ -1,0 +1,11 @@
+
+.area-chart-tile {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-between;
+}
+
+.area-chart {
+    justify-self: center;
+}
