@@ -15,7 +15,7 @@ const CityComparisonWrapper = ({ commuterRates }) => {
     const [tractLocation, setTractLocation] = useState("NA");
     const [selectedSortVal, setSelectedSortVal] = useState(null);
     const [sortDirection, setSortDirection] = useState(null);
-    const [showItems, setShowItems] = useState(50)
+    const [showItems, setShowItems] = useState(30)
 
     const tip = d3Tip()
         .attr("class", "d3-tip");
