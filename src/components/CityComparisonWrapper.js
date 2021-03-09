@@ -25,7 +25,7 @@ const CityComparisonWrapper = ({ commuterRates }) => {
             <StackedBarContext.Provider value={{ year, setYear, mode, setMode, tractLocation, setTractLocation, selectedSortVal, setSelectedSortVal, sortDirection, setSortDirection, showItems }}>
                 <CityComparisonControls />
                 <StackedBar cityCommuterRates={commuterRateData} tip={tip} />
-                <button className="stacked-bar-chart__show-more" onClick={() => setShowItems(showItems === 50 ? null : 50)}>
+                <button className="stacked-bar-chart__show-more" onClick={() => setShowItems(showItems === 30 ? null : 30)}>
                     Show { showItems === 30 ? "All" : "Less" }
                 </button>
             </StackedBarContext.Provider>
