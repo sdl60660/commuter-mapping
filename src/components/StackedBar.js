@@ -54,7 +54,7 @@ const StackedBar = ({ cityCommuterRates, tip }) => {
         // data.current = formatData(cityCommuterRates, mode, year, tractLocation, selectedSortVal, sortDirection, showItems);
         // console.log(data.current)
 
-        height.current = 18.3 * data.current.length;
+        height.current = (18 * data.current.length) + margin.top + margin.bottom;
 
         if (svg.current === null) {
             d3.select(wrapper.current)
@@ -67,6 +67,8 @@ const StackedBar = ({ cityCommuterRates, tip }) => {
                 .attr("width", width.current)
                 // .attr("viewBox", `0 0 ${width} ${height}`)
                 // .attr("preserveAspectRatio", "xMinYMin meet");
+            
+            svg.current.call(tip);
         }
         else {
             svg.current.attr("height", height.current)
@@ -80,8 +82,6 @@ const StackedBar = ({ cityCommuterRates, tip }) => {
             .domain(data.current.map(d => d.MSA))
             .range([margin.top, height.current-margin.bottom])
             .paddingInner(0.3)
-        
-        svg.current.call(tip);
 
         svg.current.selectAll("g")
             .data(series)
