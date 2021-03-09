@@ -1,4 +1,7 @@
 library("sf")
+library("tidycensus")
+library("tigris")
+
 
 tract_geojson <- st_read('../data/combined_tracts_with_commuter_data.geojson')
 largest_city_data <- read_csv("../data/msa_largest_cities.csv") %>%

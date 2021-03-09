@@ -17,7 +17,7 @@
 }
 
 .stacked-bar__label {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 .stacked-bar-chart__header {
@@ -49,7 +49,7 @@
 
 .stacked-bar-chart__sort-grid {
     margin-top: 2rem;
-    margin-left: 140px;
+    margin-left: 220px;
     max-width: 760px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -63,7 +63,7 @@
 .stacked-bar-chart__sort-by {
     cursor: pointer;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 .stacked-bar-chart__sort-by#city {
@@ -76,4 +76,12 @@
 
 .stacked-bar-chart__sort-by#outside-msa {
     color: rgb(44, 160, 44);
+}
+
+.stacked-bar-chart__show-more {
+    width: 15rem;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin: auto;
 }

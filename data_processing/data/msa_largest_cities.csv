@@ -1,166 +1,167 @@
-CITY,CITY_ID,CITY_population,MSA,MSA_ID,MSA_population
-Birmingham,0107000,145000,"Birmingham-Hoover, AL",13820,815000
-Dothan,0121184,185000,"Dothan, AL",20020,310000
-Huntsville,0137000,145000,"Huntsville, AL",26620,300000
-Mobile,0150000,150000,"Mobile, AL",33660,285000
-Montgomery,0151000,140000,"Montgomery, AL",33860,265000
-Phoenix,0455000,1050000,"Phoenix-Mesa-Scottsdale, AZ",38060,3210000
-Tucson,0477000,380000,"Tucson, AZ",46060,745000
-Fayetteville,0523290,48000,"Fayetteville-Springdale-Rogers, AR-MO",22220,380000
-Fort Smith,0524550,53000,"Fort Smith, AR-OK",22900,285000
-Little Rock,0541000,115000,"Little Rock-North Little Rock-Conway, AR",30780,490000
-Bakersfield,0603526,215000,"Bakersfield, CA",12540,550000
-Fresno,0627000,340000,"Fresno, CA",23420,675000
-Los Angeles,0644000,3000000,"Los Angeles-Long Beach-Anaheim, CA",31080,9860000
-Modesto,0648354,140000,"Modesto, CA",33700,350000
-Oxnard,0654652,140000,"Oxnard-Thousand Oaks-Ventura, CA",37100,630000
-Riverside,0662000,230000,"Riverside-San Bernardino-Ontario, CA",40140,3010000
-Sacramento,0664000,345000,"Sacramento--Roseville--Arden-Arcade, CA",40900,1660000
-Salinas,0664224,105000,"Salinas, CA",41500,320000
-San Diego,0666000,935000,"San Diego-Carlsbad, CA",41740,2210000
-San Francisco,0667000,595000,"San Francisco-Oakland-Hayward, CA",41860,3360000
-San Jose,0668000,775000,"San Jose-Sunnyvale-Santa Clara, CA",41940,1500000
-Santa Maria,0669196,66000,"Santa Maria-Santa Barbara, CA",42200,320000
-Santa Rosa,0670098,115000,"Santa Rosa, CA",42220,355000
-Stockton,0675000,215000,"Stockton-Lodi, CA",44700,520000
-Vallejo,0681666,89000,"Vallejo-Fairfield, CA",46700,320000
-Visalia,0682954,70000,"Visalia-Porterville, CA",47300,325000
-Boulder,0807850,88000,"Boulder, CO",14500,250000
-Colorado Springs,0816000,320000,"Colorado Springs, CO",17820,495000
-Denver,0820000,460000,"Denver-Aurora-Lakewood, CO",19740,2130000
-Greeley,0832155,90000,"Greeley, CO",24540,270000
-Bridgeport,0908000,98000,"Bridgeport-Stamford-Norwalk, CT",14860,715000
-Hartford,0937000,93000,"Hartford-West Hartford-East Hartford, CT",25540,935000
-New Haven,0952000,90000,"New Haven-Milford, CT",35300,590000
-Washington,1150000,495000,"Washington-Arlington-Alexandria, DC-VA-MD-WV",47900,4700000
-Cape Coral,1210275,88000,"Cape Coral-Fort Myers, FL",15980,455000
-Deltona,1217200,50000,"Deltona-Daytona Beach-Ormond Beach, FL",19660,410000
-Jacksonville,1235000,505000,"Jacksonville, FL",27260,840000
-Lakeland,1238250,79000,"Lakeland-Winter Haven, FL",29460,450000
-Miami,1245000,235000,"Miami-Fort Lauderdale-West Palm Beach, FL",33100,3560000
-Orlando,1253000,145000,"Orlando-Kissimmee-Sanford, FL",36740,1300000
-Palm Bay,1254000,51000,"Palm Bay-Melbourne-Titusville, FL",37340,340000
-Pensacola,1255925,38000,"Pensacola-Ferry Pass-Brent, FL",37860,305000
-Sarasota,1264175,43000,"North Port-Sarasota-Bradenton, FL",35840,505000
-Tallahassee,1270600,125000,"Tallahassee, FL",45220,265000
-Tampa,1271000,265000,"Tampa-St. Petersburg-Clearwater, FL",45300,2120000
-Atlanta,1304000,320000,"Atlanta-Sandy Springs-Roswell, GA",12060,3290000
-Augusta-Richmond County consolidated government (balance),1304204,120000,"Augusta-Richmond County, GA-SC",12260,360000
-Savannah,1369000,120000,"Savannah, GA",42340,255000
-Urban Honolulu,1571550,300000,"Urban Honolulu, HI",46520,905000
-Boise City,1608830,140000,"Boise City, ID",14260,405000
-Chicago,1714000,1960000,"Chicago-Naperville-Elgin, IL-IN-WI",16980,7120000
-Peoria,1759000,87000,"Peoria, IL",37900,395000
-Rockford,1765000,120000,"Rockford, IL",40420,270000
-Evansville,1822000,96000,"Evansville, IN-KY",21780,255000
-Fort Wayne,1825000,205000,"Fort Wayne, IN",23060,360000
-Indianapolis city (balance),1836003,545000,"Indianapolis-Carmel-Anderson, IN",26900,1360000
-South Bend,1871000,92000,"South Bend-Mishawaka, IN-MI",43780,305000
-Cedar Rapids,1912000,95000,"Cedar Rapids, IA",16300,255000
-Davenport,1919000,83000,"Davenport-Moline-Rock Island, IA-IL",19340,380000
-Des Moines,1921000,175000,"Des Moines-West Des Moines, IA",19780,535000
-Wichita,2079000,300000,"Wichita, KS",48620,560000
-Lexington-Fayette,2146027,250000,"Lexington-Fayette, KY",30460,410000
-Louisville/Jefferson County metro government (balance),2148006,445000,"Louisville/Jefferson County, KY-IN",31140,1130000
-Baton Rouge,2205000,130000,"Baton Rouge, LA",12940,465000
-Lafayette,2240735,73000,"Lafayette, LA",29180,280000
-New Orleans,2255000,355000,"New Orleans-Metairie, LA",35380,940000
-Shreveport,2270000,120000,"Shreveport-Bossier City, LA",43340,285000
-Portland,2360545,55000,"Portland-South Portland, ME",38860,410000
-Baltimore,2404000,455000,"Baltimore-Columbia-Towson, MD",12580,2070000
-Salisbury,2469925,21000,"Salisbury, MD-DE",41540,355000
-Boston,2507000,495000,"Boston-Cambridge-Newton, MA-NH",14460,3480000
-Springfield,2567000,105000,"Springfield, MA",44140,485000
-Worcester,2582000,135000,"Worcester, MA-CT",49340,710000
-Ann Arbor,2603000,110000,"Ann Arbor, MI",11460,345000
-Detroit,2622000,500000,"Detroit-Warren-Dearborn, MI",19820,3750000
-Flint,2629000,69000,"Flint, MI",22420,340000
-Grand Rapids,2634000,160000,"Grand Rapids-Wyoming, MI",24340,900000
-Kalamazoo,2642160,69000,"Kalamazoo-Portage, MI",28020,320000
-Lansing,2646000,88000,"Lansing-East Lansing, MI",29620,505000
-Duluth,2717000,97000,"Duluth, MN-WI",20260,475000
-Minneapolis,2743000,365000,"Minneapolis-St. Paul-Bloomington, MN-WI",33460,3450000
-Rochester,2754880,95000,"Rochester, MN",40340,350000
-St. Cloud,2756896,50000,"St. Cloud, MN",41060,310000
-Jackson,2836000,115000,"Jackson, MS",27140,380000
-Kansas City,2938000,360000,"Kansas City, MO-KS",28140,1740000
-St. Louis,2965000,235000,"St. Louis, MO-IL",41180,2210000
-Springfield,2970000,130000,"Springfield, MO",44180,365000
-Lincoln,3128000,230000,"Lincoln, NE",30700,305000
-Omaha,3137000,415000,"Omaha-Council Bluffs, NE-IA",36540,930000
-Las Vegas,3240000,445000,"Las Vegas-Henderson-Paradise, NV",29820,1470000
-Reno,3260600,175000,"Reno, NV",39900,330000
-Hanover,3333780,12000,"Claremont-Lebanon, NH-VT",17200,275000
-Manchester,3345140,84000,"Manchester-Nashua, NH",31700,315000
-Trenton,3474000,51000,"Trenton, NJ",45940,250000
-Albuquerque,3502000,350000,"Albuquerque, NM",10740,630000
-Albany,3601000,72000,"Albany-Schenectady-Troy, NY",10580,745000
-Buffalo,3611000,195000,"Buffalo-Cheektowaga-Niagara Falls, NY",15380,895000
-New York,3651000,5770000,"New York-Newark-Jersey City, NY-NJ-PA",35620,14460000
-Rochester,3663000,170000,"Rochester, NY",40380,965000
-Syracuse,3673000,140000,"Syracuse, NY",45060,660000
-Utica,3676540,54000,"Utica-Rome, NY",46540,315000
-Asheville,3702140,62000,"Asheville, NC",11700,320000
-Charlotte,3712000,555000,"Charlotte-Concord-Gastonia, NC-SC",16740,1760000
-Durham,3719000,160000,"Durham-Chapel Hill, NC",20500,385000
-Fayetteville,3722920,165000,"Fayetteville, NC",22180,295000
-Greensboro,3728000,200000,"Greensboro-High Point, NC",24660,535000
-Hickory,3731060,30000,"Hickory-Lenoir-Morganton, NC",25860,260000
-Raleigh,3755000,280000,"Raleigh, NC",39580,830000
-Winston-Salem,3775000,180000,"Winston-Salem, NC",49180,475000
-Akron,3901000,140000,"Akron, OH",10420,545000
-Canton,3912000,53000,"Canton-Massillon, OH",15940,340000
-Cincinnati,3915000,240000,"Cincinnati, OH-KY-IN",17140,1660000
-Cleveland,3916000,325000,"Cleveland-Elyria, OH",17460,1800000
-Columbus,3918000,575000,"Columbus, OH",18140,1540000
-Dayton,3921000,115000,"Dayton, OH",19380,650000
-Toledo,3977000,215000,"Toledo, OH",45780,515000
-Youngstown,3988000,63000,"Youngstown-Warren-Boardman, OH-PA",49660,555000
-Oklahoma City,4055000,500000,"Oklahoma City, OK",36420,1190000
-Tulsa,4075000,470000,"Tulsa, OK",46140,1220000
-Eugene,4123850,125000,"Eugene, OR",21660,295000
-Portland,4159000,470000,"Portland-Vancouver-Hillsboro, OR-WA",38900,1780000
-Salem,4164900,115000,"Salem, OR",41420,295000
-Allentown,4202000,84000,"Allentown-Bethlehem-Easton, PA-NJ",10900,705000
-Erie,4224000,85000,"Erie, PA",21500,280000
-Harrisburg,4232800,34000,"Harrisburg-Carlisle, PA",25420,550000
-Lancaster,4241216,45000,"Lancaster, PA",29540,415000
-Philadelphia,4260000,955000,"Philadelphia-Camden-Wilmington, PA-NJ-DE-MD",37980,4760000
-Pittsburgh,4261000,290000,"Pittsburgh, PA",38300,2410000
-Reading,4263624,68000,"Reading, PA",39740,385000
-Scranton,4269000,73000,"Scranton--Wilkes-Barre--Hazleton, PA",42540,625000
-York,4287048,34000,"York-Hanover, PA",49620,390000
-Providence,4459000,120000,"Providence-Warwick, RI-MA",39300,1150000
-Charleston,4513330,100000,"Charleston-North Charleston, SC",16700,500000
-Columbia,4516000,130000,"Columbia, SC",17900,600000
-Greenville,4530850,61000,"Greenville-Anderson-Mauldin, SC",24860,625000
-Myrtle Beach,4549075,22000,"Myrtle Beach-Conway-North Myrtle Beach, SC-NC",34820,315000
-Sioux Falls,4659020,125000,"Sioux Falls, SD",43620,255000
-Chattanooga,4714000,120000,"Chattanooga, TN-GA",16860,385000
-Kingsport,4739560,42000,"Kingsport-Bristol-Bristol, TN-VA",28700,250000
-Knoxville,4740000,135000,"Knoxville, TN",28940,650000
-Memphis,4748000,400000,"Memphis, TN-MS-AR",32820,870000
-Nashville-Davidson metropolitan government (balance),4752006,445000,"Nashville-Davidson--Murfreesboro--Franklin, TN",34980,1290000
-Austin,4805000,565000,"Austin-Round Rock, TX",12420,1250000
-Beaumont,4807000,73000,"Beaumont-Port Arthur, TX",13140,275000
-Brownsville,4810768,115000,"Brownsville-Harlingen, TX",15180,260000
-Corpus Christi,4817000,205000,"Corpus Christi, TX",18580,295000
-Dallas,4819000,810000,"Dallas-Fort Worth-Arlington, TX",19100,4620000
-El Paso,4824000,385000,"El Paso, TX",21340,490000
-Houston,4835000,1270000,"Houston-The Woodlands-Sugar Land, TX",26420,3490000
-Killeen,4839148,76000,"Killeen-Temple, TX",28660,295000
-Laredo,4841464,165000,NA,NA,NA
-McAllen,4845384,71000,"McAllen-Edinburg-Mission, TX",32580,395000
-San Antonio,4865000,870000,"San Antonio-New Braunfels, TX",41700,1490000
-Ogden,4955980,66000,"Ogden-Clearfield, UT",36260,520000
-Provo,4962470,120000,"Provo-Orem, UT",39340,615000
-Salt Lake City,4967000,150000,"Salt Lake City, UT",41620,840000
-Richmond,5167000,170000,"Richmond, VA",40060,935000
-Virginia Beach,5182000,335000,"Virginia Beach-Norfolk-Newport News, VA-NC",47260,1260000
-Seattle,5363000,465000,"Seattle-Tacoma-Bellevue, WA",42660,2740000
-Spokane,5367000,160000,"Spokane-Spokane Valley, WA",44060,445000
-Huntington,5439460,47000,"Huntington-Ashland, WV-KY-OH",26580,275000
-Appleton,5502375,70000,"Appleton, WI",11540,275000
-Green Bay,5531000,89000,"Green Bay, WI",24580,365000
-Madison,5548000,195000,"Madison, WI",31540,760000
-Milwaukee,5553000,520000,"Milwaukee-Waukesha-West Allis, WI",33340,1410000
+CITY,CITY_ID,CITY_population,MSA,MSA_ID,MSA_population,STATE_ID
+Birmingham,0107000,145000,"Birmingham-Hoover, AL",13820,815000,01
+Dothan,0121184,185000,"Dothan, AL",20020,310000,01
+Huntsville,0137000,145000,"Huntsville, AL",26620,300000,01
+Mobile,0150000,150000,"Mobile, AL",33660,285000,01
+Montgomery,0151000,140000,"Montgomery, AL",33860,265000,01
+Anchorage,0203000,195000,"Anchorage, AK",11260,340000,02
+Phoenix,0455000,1050000,"Phoenix-Mesa-Scottsdale, AZ",38060,3210000,04
+Tucson,0477000,380000,"Tucson, AZ",46060,745000,04
+Fayetteville,0523290,48000,"Fayetteville-Springdale-Rogers, AR-MO",22220,380000,05
+Fort Smith,0524550,53000,"Fort Smith, AR-OK",22900,285000,05
+Little Rock,0541000,115000,"Little Rock-North Little Rock-Conway, AR",30780,490000,05
+Bakersfield,0603526,215000,"Bakersfield, CA",12540,550000,06
+Fresno,0627000,340000,"Fresno, CA",23420,675000,06
+Los Angeles,0644000,3000000,"Los Angeles-Long Beach-Anaheim, CA",31080,9860000,06
+Modesto,0648354,140000,"Modesto, CA",33700,350000,06
+Oxnard,0654652,140000,"Oxnard-Thousand Oaks-Ventura, CA",37100,630000,06
+Riverside,0662000,230000,"Riverside-San Bernardino-Ontario, CA",40140,3010000,06
+Sacramento,0664000,345000,"Sacramento--Roseville--Arden-Arcade, CA",40900,1660000,06
+Salinas,0664224,105000,"Salinas, CA",41500,320000,06
+San Diego,0666000,935000,"San Diego-Carlsbad, CA",41740,2210000,06
+San Francisco,0667000,595000,"San Francisco-Oakland-Hayward, CA",41860,3360000,06
+San Jose,0668000,775000,"San Jose-Sunnyvale-Santa Clara, CA",41940,1500000,06
+Santa Maria,0669196,66000,"Santa Maria-Santa Barbara, CA",42200,320000,06
+Santa Rosa,0670098,115000,"Santa Rosa, CA",42220,355000,06
+Stockton,0675000,215000,"Stockton-Lodi, CA",44700,520000,06
+Vallejo,0681666,89000,"Vallejo-Fairfield, CA",46700,320000,06
+Visalia,0682954,70000,"Visalia-Porterville, CA",47300,325000,06
+Boulder,0807850,88000,"Boulder, CO",14500,250000,08
+Colorado Springs,0816000,320000,"Colorado Springs, CO",17820,495000,08
+Denver,0820000,460000,"Denver-Aurora-Lakewood, CO",19740,2130000,08
+Greeley,0832155,90000,"Greeley, CO",24540,270000,08
+Bridgeport,0908000,98000,"Bridgeport-Stamford-Norwalk, CT",14860,715000,09
+Hartford,0937000,93000,"Hartford-West Hartford-East Hartford, CT",25540,935000,09
+New Haven,0952000,90000,"New Haven-Milford, CT",35300,590000,09
+Washington,1150000,495000,"Washington-Arlington-Alexandria, DC-VA-MD-WV",47900,4700000,11
+Cape Coral,1210275,88000,"Cape Coral-Fort Myers, FL",15980,455000,12
+Deltona,1217200,50000,"Deltona-Daytona Beach-Ormond Beach, FL",19660,410000,12
+Jacksonville,1235000,505000,"Jacksonville, FL",27260,840000,12
+Lakeland,1238250,79000,"Lakeland-Winter Haven, FL",29460,450000,12
+Miami,1245000,235000,"Miami-Fort Lauderdale-West Palm Beach, FL",33100,3560000,12
+Orlando,1253000,145000,"Orlando-Kissimmee-Sanford, FL",36740,1300000,12
+Palm Bay,1254000,51000,"Palm Bay-Melbourne-Titusville, FL",37340,340000,12
+Pensacola,1255925,38000,"Pensacola-Ferry Pass-Brent, FL",37860,305000,12
+Sarasota,1264175,43000,"North Port-Sarasota-Bradenton, FL",35840,505000,12
+Tallahassee,1270600,125000,"Tallahassee, FL",45220,265000,12
+Tampa,1271000,265000,"Tampa-St. Petersburg-Clearwater, FL",45300,2120000,12
+Atlanta,1304000,320000,"Atlanta-Sandy Springs-Roswell, GA",12060,3290000,13
+Augusta-Richmond County consolidated government (balance),1304204,120000,"Augusta-Richmond County, GA-SC",12260,360000,13
+Savannah,1369000,120000,"Savannah, GA",42340,255000,13
+Urban Honolulu,1571550,300000,"Urban Honolulu, HI",46520,905000,15
+Boise City,1608830,140000,"Boise City, ID",14260,405000,16
+Chicago,1714000,1960000,"Chicago-Naperville-Elgin, IL-IN-WI",16980,7120000,17
+Peoria,1759000,87000,"Peoria, IL",37900,395000,17
+Rockford,1765000,120000,"Rockford, IL",40420,270000,17
+Evansville,1822000,96000,"Evansville, IN-KY",21780,255000,18
+Fort Wayne,1825000,205000,"Fort Wayne, IN",23060,360000,18
+Indianapolis city (balance),1836003,545000,"Indianapolis-Carmel-Anderson, IN",26900,1360000,18
+South Bend,1871000,92000,"South Bend-Mishawaka, IN-MI",43780,305000,18
+Cedar Rapids,1912000,95000,"Cedar Rapids, IA",16300,255000,19
+Davenport,1919000,83000,"Davenport-Moline-Rock Island, IA-IL",19340,380000,19
+Des Moines,1921000,175000,"Des Moines-West Des Moines, IA",19780,535000,19
+Wichita,2079000,300000,"Wichita, KS",48620,560000,20
+Lexington-Fayette,2146027,250000,"Lexington-Fayette, KY",30460,410000,21
+Louisville/Jefferson County metro government (balance),2148006,445000,"Louisville/Jefferson County, KY-IN",31140,1130000,21
+Baton Rouge,2205000,130000,"Baton Rouge, LA",12940,465000,22
+Lafayette,2240735,73000,"Lafayette, LA",29180,280000,22
+New Orleans,2255000,355000,"New Orleans-Metairie, LA",35380,940000,22
+Shreveport,2270000,120000,"Shreveport-Bossier City, LA",43340,285000,22
+Portland,2360545,55000,"Portland-South Portland, ME",38860,410000,23
+Baltimore,2404000,455000,"Baltimore-Columbia-Towson, MD",12580,2070000,24
+Salisbury,2469925,21000,"Salisbury, MD-DE",41540,355000,24
+Boston,2507000,495000,"Boston-Cambridge-Newton, MA-NH",14460,3480000,25
+Springfield,2567000,105000,"Springfield, MA",44140,485000,25
+Worcester,2582000,135000,"Worcester, MA-CT",49340,710000,25
+Ann Arbor,2603000,110000,"Ann Arbor, MI",11460,345000,26
+Detroit,2622000,500000,"Detroit-Warren-Dearborn, MI",19820,3750000,26
+Flint,2629000,69000,"Flint, MI",22420,340000,26
+Grand Rapids,2634000,160000,"Grand Rapids-Wyoming, MI",24340,900000,26
+Kalamazoo,2642160,69000,"Kalamazoo-Portage, MI",28020,320000,26
+Lansing,2646000,88000,"Lansing-East Lansing, MI",29620,505000,26
+Duluth,2717000,97000,"Duluth, MN-WI",20260,475000,27
+Minneapolis,2743000,365000,"Minneapolis-St. Paul-Bloomington, MN-WI",33460,3450000,27
+Rochester,2754880,95000,"Rochester, MN",40340,350000,27
+St. Cloud,2756896,50000,"St. Cloud, MN",41060,310000,27
+Jackson,2836000,115000,"Jackson, MS",27140,380000,28
+Kansas City,2938000,360000,"Kansas City, MO-KS",28140,1740000,29
+St. Louis,2965000,235000,"St. Louis, MO-IL",41180,2210000,29
+Springfield,2970000,130000,"Springfield, MO",44180,365000,29
+Lincoln,3128000,230000,"Lincoln, NE",30700,305000,31
+Omaha,3137000,415000,"Omaha-Council Bluffs, NE-IA",36540,930000,31
+Las Vegas,3240000,445000,"Las Vegas-Henderson-Paradise, NV",29820,1470000,32
+Reno,3260600,175000,"Reno, NV",39900,330000,32
+Hanover,3333780,12000,"Claremont-Lebanon, NH-VT",17200,275000,33
+Manchester,3345140,84000,"Manchester-Nashua, NH",31700,315000,33
+Trenton,3474000,51000,"Trenton, NJ",45940,250000,34
+Albuquerque,3502000,350000,"Albuquerque, NM",10740,630000,35
+Albany,3601000,72000,"Albany-Schenectady-Troy, NY",10580,745000,36
+Buffalo,3611000,195000,"Buffalo-Cheektowaga-Niagara Falls, NY",15380,895000,36
+New York,3651000,5770000,"New York-Newark-Jersey City, NY-NJ-PA",35620,14460000,36
+Rochester,3663000,170000,"Rochester, NY",40380,965000,36
+Syracuse,3673000,140000,"Syracuse, NY",45060,660000,36
+Utica,3676540,54000,"Utica-Rome, NY",46540,315000,36
+Asheville,3702140,62000,"Asheville, NC",11700,320000,37
+Charlotte,3712000,555000,"Charlotte-Concord-Gastonia, NC-SC",16740,1760000,37
+Durham,3719000,160000,"Durham-Chapel Hill, NC",20500,385000,37
+Fayetteville,3722920,165000,"Fayetteville, NC",22180,295000,37
+Greensboro,3728000,200000,"Greensboro-High Point, NC",24660,535000,37
+Hickory,3731060,30000,"Hickory-Lenoir-Morganton, NC",25860,260000,37
+Raleigh,3755000,280000,"Raleigh, NC",39580,830000,37
+Winston-Salem,3775000,180000,"Winston-Salem, NC",49180,475000,37
+Akron,3901000,140000,"Akron, OH",10420,545000,39
+Canton,3912000,53000,"Canton-Massillon, OH",15940,340000,39
+Cincinnati,3915000,240000,"Cincinnati, OH-KY-IN",17140,1660000,39
+Cleveland,3916000,325000,"Cleveland-Elyria, OH",17460,1800000,39
+Columbus,3918000,575000,"Columbus, OH",18140,1540000,39
+Dayton,3921000,115000,"Dayton, OH",19380,650000,39
+Toledo,3977000,215000,"Toledo, OH",45780,515000,39
+Youngstown,3988000,63000,"Youngstown-Warren-Boardman, OH-PA",49660,555000,39
+Oklahoma City,4055000,500000,"Oklahoma City, OK",36420,1190000,40
+Tulsa,4075000,470000,"Tulsa, OK",46140,1220000,40
+Eugene,4123850,125000,"Eugene, OR",21660,295000,41
+Portland,4159000,470000,"Portland-Vancouver-Hillsboro, OR-WA",38900,1780000,41
+Salem,4164900,115000,"Salem, OR",41420,295000,41
+Allentown,4202000,84000,"Allentown-Bethlehem-Easton, PA-NJ",10900,705000,42
+Erie,4224000,85000,"Erie, PA",21500,280000,42
+Harrisburg,4232800,34000,"Harrisburg-Carlisle, PA",25420,550000,42
+Lancaster,4241216,45000,"Lancaster, PA",29540,415000,42
+Philadelphia,4260000,955000,"Philadelphia-Camden-Wilmington, PA-NJ-DE-MD",37980,4760000,42
+Pittsburgh,4261000,290000,"Pittsburgh, PA",38300,2410000,42
+Reading,4263624,68000,"Reading, PA",39740,385000,42
+Scranton,4269000,73000,"Scranton--Wilkes-Barre--Hazleton, PA",42540,625000,42
+York,4287048,34000,"York-Hanover, PA",49620,390000,42
+Providence,4459000,120000,"Providence-Warwick, RI-MA",39300,1150000,44
+Charleston,4513330,100000,"Charleston-North Charleston, SC",16700,500000,45
+Columbia,4516000,130000,"Columbia, SC",17900,600000,45
+Greenville,4530850,61000,"Greenville-Anderson-Mauldin, SC",24860,625000,45
+Myrtle Beach,4549075,22000,"Myrtle Beach-Conway-North Myrtle Beach, SC-NC",34820,315000,45
+Sioux Falls,4659020,125000,"Sioux Falls, SD",43620,255000,46
+Chattanooga,4714000,120000,"Chattanooga, TN-GA",16860,385000,47
+Kingsport,4739560,42000,"Kingsport-Bristol-Bristol, TN-VA",28700,250000,47
+Knoxville,4740000,135000,"Knoxville, TN",28940,650000,47
+Memphis,4748000,400000,"Memphis, TN-MS-AR",32820,870000,47
+Nashville-Davidson metropolitan government (balance),4752006,445000,"Nashville-Davidson--Murfreesboro--Franklin, TN",34980,1290000,47
+Austin,4805000,565000,"Austin-Round Rock, TX",12420,1250000,48
+Beaumont,4807000,73000,"Beaumont-Port Arthur, TX",13140,275000,48
+Brownsville,4810768,115000,"Brownsville-Harlingen, TX",15180,260000,48
+Corpus Christi,4817000,205000,"Corpus Christi, TX",18580,295000,48
+Dallas,4819000,810000,"Dallas-Fort Worth-Arlington, TX",19100,4620000,48
+El Paso,4824000,385000,"El Paso, TX",21340,490000,48
+Houston,4835000,1270000,"Houston-The Woodlands-Sugar Land, TX",26420,3490000,48
+Killeen,4839148,76000,"Killeen-Temple, TX",28660,295000,48
+Laredo,4841464,165000,NA,NA,NA,48
+McAllen,4845384,71000,"McAllen-Edinburg-Mission, TX",32580,395000,48
+San Antonio,4865000,870000,"San Antonio-New Braunfels, TX",41700,1490000,48
+Ogden,4955980,66000,"Ogden-Clearfield, UT",36260,520000,49
+Provo,4962470,120000,"Provo-Orem, UT",39340,615000,49
+Salt Lake City,4967000,150000,"Salt Lake City, UT",41620,840000,49
+Richmond,5167000,170000,"Richmond, VA",40060,935000,51
+Virginia Beach,5182000,335000,"Virginia Beach-Norfolk-Newport News, VA-NC",47260,1260000,51
+Seattle,5363000,465000,"Seattle-Tacoma-Bellevue, WA",42660,2740000,53
+Spokane,5367000,160000,"Spokane-Spokane Valley, WA",44060,445000,53
+Huntington,5439460,47000,"Huntington-Ashland, WV-KY-OH",26580,275000,54
+Appleton,5502375,70000,"Appleton, WI",11540,275000,55
+Green Bay,5531000,89000,"Green Bay, WI",24580,365000,55
+Madison,5548000,195000,"Madison, WI",31540,760000,55
+Milwaukee,5553000,520000,"Milwaukee-Waukesha-West Allis, WI",33340,1410000,55

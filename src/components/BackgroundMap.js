@@ -38,7 +38,7 @@ const addTractLayer = ({ map, featuredTracts, featuredCity }) => {
         'layout': {},
         'paint': {
             'fill-color': {
-                property: 'outside_msa_commuter_rate_2018',
+                property: 'city_commuter_rate_2018',
                 stops: [[0, '#fff'], [1, stopColor]]
             },
             'fill-opacity': 0.7

@@ -23,9 +23,9 @@ tract_centroids <- st_centroid(us_tracts) %>%
 # st_write(us_tracts, '../data/us_tracts.geojson')
 
 # Get geodata for MSAs
-msa_geo <- core_based_statistical_areas(cb = TRUE, resolution = "500k", year= 2011)
+msa_geo <- core_based_statistical_areas(cb = TRUE, resolution = "500k", year= 2018)
 # Get population data for MSAs and match name formatting to geodata
-msa_acs_data <- get_acs("metropolitan statistical area/micropolitan statistical area", variables = "B00001_001", year = 2011)
+msa_acs_data <- get_acs("metropolitan statistical area/micropolitan statistical area", variables = "B00001_001", year = 2018)
 msa_acs_data$NAME <- substr(msa_acs_data$NAME, 1, nchar(msa_acs_data$NAME)-11)
 
 # Join geodata and population data by GEO_ID/NAME and filter by population
@@ -54,10 +54,10 @@ tracts_with_msas <- st_join(tract_centroids, msa_data, type = st_intersects) %>%
   filter(MSA != "")
 
 places <- map_df(us_states, function(us_state) {
-  places(state = us_state, cb = TRUE, year = 2011)
+  places(state = us_state, cb = TRUE, year = 2018)
 })
 places_acs <- map_df(us_states, function(us_state) {
-  get_acs("place", state = us_state, variables = "B00001_001", year = 2011)
+  get_acs("place", state = us_state, variables = "B00001_001", year = 2018)
 }) 
 places_data <- merge(x = places, y = places_acs, by = "GEOID")
 
@@ -96,8 +96,9 @@ cities_with_msas <- st_join(places_centroids, msa_data, type = st_intersects) %>
     MSA = NAME,
     MSA_ID = GEOID.y,
     MSA_population = population,
+    STATE_ID, STATEFP
   ) %>% 
-  select(CITY, CITY_ID, CITY_population, MSA, MSA_ID, MSA_population)
+  select(CITY, CITY_ID, CITY_population, MSA, MSA_ID, MSA_population, STATE_ID)
 cities_with_msas$CITY_population <- 10*cities_with_msas$CITY_population
 # Write dict of MSAs and largest cities to CSV
 write_csv(cities_with_msas, '../data/msa_largest_cities.csv')
