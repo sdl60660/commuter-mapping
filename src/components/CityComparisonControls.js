@@ -11,8 +11,8 @@ const CityComparisonControls = () => {
     const { year, mode, setYear, setMode, setTractLocation, selectedSortVal, setSelectedSortVal, sortDirection, setSortDirection }
         = useContext(StackedBarContext);
 
-    const yearOptions = ['2011', '2018'].map(year => ({ value: year, label: year }));
-    const modeOptions = ["Percentages", "Totals"].map(mode => ({ value: mode.toLowerCase(), label: mode }));
+    const yearOptions = ['2018', '2011'].map(year => ({ value: year, label: year }));
+    const modeOptions = ["Totals", "Percentages"].map(mode => ({ value: mode.toLowerCase(), label: mode }));
     const tractLocationOptions = [
         {
             label: "Full Metro Area",

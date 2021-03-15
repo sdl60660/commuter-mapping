@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState, useContext, useLayoutEffect } from 'react';
 import * as d3 from 'd3';
-
 import { StackedBarContext } from '../StackedBarContext';
 
 const formatData = (data, mode, year, centerCity, selectedSortVal, sortDirection, showItems) => {
@@ -20,9 +19,7 @@ const formatData = (data, mode, year, centerCity, selectedSortVal, sortDirection
                 return b[sortKey] - a[sortKey];
             }
             
-        })
-        // .slice(0, (showItems ? showItems : data.length));
-    
+        })    
 }
 
 
@@ -39,9 +36,6 @@ const StackedBar = ({ cityCommuterRates, tip }) => {
     data.current = formatData(cityCommuterRates, mode, year, tractLocation, selectedSortVal, sortDirection, showItems)
 
     const keys = ["City", "Suburbs/Exurbs", "Outside of Metro Area"];
-    // const sortLabels = ["City", "Work in Largest City", "Work Outside of Largest City", "Work Outside of Metro Area"];
-    // const sortLabelIds = ['totals', 'city', 'suburban', 'outside-msa'];
-
     const series = d3.stack()
         .keys(keys)(data.current)
         .map(d => (d.forEach(v => v.key = d.key), d))
@@ -66,11 +60,6 @@ const StackedBar = ({ cityCommuterRates, tip }) => {
     useEffect(() => {
         // data.current = formatData(cityCommuterRates, mode, year, tractLocation, selectedSortVal, sortDirection, showItems);
         height.current = (18 * ( showItems ? showItems : data.current.length)) + margin.top + margin.bottom;
-        
-        // const labelPosition = d3.scaleBand()
-        //     .domain(sortLabels)
-        //     .range([0, width-margin.right])
-        //     .paddingOuter(0.3)
 
         if (svg.current === null) {
             d3.select(wrapper.current)
@@ -81,39 +70,14 @@ const StackedBar = ({ cityCommuterRates, tip }) => {
                 .attr("class", "stacked-bar__svg")
                 .attr("height", height.current)
                 .attr("width", width)
-                // .attr("viewBox", `0 0 ${width} ${height}`)
-                // .attr("preserveAspectRatio", "xMinYMin meet");
             
             svg.current.call(tip);
-
-            // svg.current.append("g")
-            //     .attr("class", "sort-options")
-            //     // .attr("transform", `translate(${margin.left}px, 0px)`)
-            //     .selectAll("text")
-            //     .data(sortLabels)
-            //     .join("text")
-            //         .attr("class", "sort-label")
-            //         .attr("id", (d,i) => sortLabelIds[i])
-            //         .attr("x", (d) => labelPosition(d))
-            //         .attr("y", 10)
-            //         .style("text-anchor", "start")
-            //         .style("font-size", "0.9rem")
-            //         .style("fill", (d,i) => d3.schemeCategory10[i-1])
-            //         .on('click', function() {
-            //             const element = d3.select(this);
-            //             const currentText = element.text();
-            //             element.text(currentText + " ▼")
-            //         })
-            //         .text(d => d)
 
         }
         else {
             svg.current
                 .attr("height", height.current)
                 .attr("width", width)
-
-            // svg.current.selectAll(".sort-label")
-            //     .attr("x", (d) => labelPosition(d))
         }
         
         const xDomain = mode === "totals" ? [0, d3.max(data.current, d => +d[`total_commuters_${year}`])] : [0, 1];
@@ -166,11 +130,6 @@ const StackedBar = ({ cityCommuterRates, tip }) => {
                 });
 
     }, [year, mode, tractLocation, selectedSortVal, sortDirection, showItems, width])
-
-
-    // useEffect(() => {
-        
-    // }, [year, mode]);
 
     return (
         <div className={"stacked-bar-chart"}>
