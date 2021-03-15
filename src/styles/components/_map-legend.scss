@@ -9,12 +9,15 @@
     background-color: rgba(255, 255, 255, 0.6);
     
     right: $xl-size;
-    margin-top: $xl-size;
+    margin-top: 8rem;
 
     @media screen and (max-width: $mobile-breakpoint) {
         right: 50%;
         transform: translateX(50%);
-        margin: $xl-size auto;
+        position: relative;
+        margin-top: $s-size;
+        // margin: $xl-size auto;
+        // top: 58%;
     }
     
 }

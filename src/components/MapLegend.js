@@ -1,11 +1,11 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useRef } from 'react';
 import * as d3 from 'd3';
 import * as chromatic from "d3-scale-chromatic";
 import { MapContext } from '../MapContext';
 
-
 const MapLegend = () => {
-    const { featuredCity, largestCityDisplay } = useContext(MapContext)
+    const { featuredCity, largestCityDisplay, displayField } = useContext(MapContext);
+    const legendMessage = useRef(`Job location in ${largestCityDisplay} (%)`)
 
     const gradientColor = chromatic.schemeCategory10[Math.round(parseInt(featuredCity) / 72) % 10]
     
@@ -26,11 +26,9 @@ const MapLegend = () => {
         .tickValues([0, 0.25, 0.5, 0.75, 1.0]);
 
     useEffect(() => {
-
         d3.select(".legend__axis")
             .call(xAxis)
             .select(".domain").remove();
-
     }, [])
 
     return (
@@ -45,7 +43,11 @@ const MapLegend = () => {
                     </linearGradient>
                 </defs>
             </svg>
-            <div className={"legend__message"}>Tract residents working in {largestCityDisplay} (%)</div>
+            <div className={"legend__message"}>{
+                displayField.startsWith('city') ? `Job location in ${largestCityDisplay} (%)` :
+                displayField.startsWith('suburban') ? `Job location in metro, outside ${largestCityDisplay} (%)` :
+                `Job location outside of metro area (%)`
+            }</div>
         </div>
     )
 }

@@ -47,19 +47,20 @@ const CityComparisonControls = () => {
                     onChange={(value) => onChange(value, setMode)}
                 />
                 <Select
-                    defaultValue={yearOptions.find(option => option.value === year)}
-                    className="stacked-bar-chart__control"
-                    options={yearOptions}
-                    onChange={(value) => onChange(value, setYear)}
-                />
-                <Select
                     defaultValue={tractLocationOptions.find(option => option.value === "NA")}
                     className="stacked-bar-chart__control"
                     options={tractLocationOptions}
                     onChange={(value) => onChange(value, setTractLocation)}
                 />
+                <Select
+                    defaultValue={yearOptions.find(option => option.value === year)}
+                    className="stacked-bar-chart__control stacked-bar-chart__control-hide-mobile"
+                    options={yearOptions}
+                    onChange={(value) => onChange(value, setYear)}
+                />
             </div>
             <div className="stacked-bar-chart__sort-grid">
+                <div className="stacked-bar-chart__sort-by" id="totals" onClick={(e) => sortChange(e)}>Metro Area Size{arrowString("totals")}</div>
                 <div className="stacked-bar-chart__sort-by" id="city" onClick={(e) => sortChange(e)}>Work in Largest City{arrowString("city")}</div>
                 <div className="stacked-bar-chart__sort-by" id="suburban" onClick={(e) => sortChange(e)}>Work Outside of Largest City{arrowString("suburban")}</div>
                 <div className="stacked-bar-chart__sort-by" id="outside-msa" onClick={(e) => sortChange(e)}>Work Outside of Metro Area{arrowString("outside-msa")}</div>

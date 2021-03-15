@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useContext } from 'react';
+import React, { useEffect, useRef, useState, useContext, useLayoutEffect } from 'react';
 import * as d3 from 'd3';
 
 import { StackedBarContext } from '../StackedBarContext';
@@ -12,7 +12,7 @@ const formatData = (data, mode, year, centerCity, selectedSortVal, sortDirection
     }))
         .filter(d => d.in_center_city === centerCity)
         .sort((a, b) => {
-            const sortKey = selectedSortVal === null ? `total_commuters_${year}` : selectedSortVal === "city" ? "City" : selectedSortVal === "suburban" ? "Suburbs/Exurbs" : "Outside of Metro Area";
+            const sortKey = selectedSortVal === 'totals' ? `total_commuters_${year}` : selectedSortVal === "city" ? "City" : selectedSortVal === "suburban" ? "Suburbs/Exurbs" : "Outside of Metro Area";
             if (sortDirection === "up") {
                 return a[sortKey] - b[sortKey];
             }
@@ -21,40 +21,56 @@ const formatData = (data, mode, year, centerCity, selectedSortVal, sortDirection
             }
             
         })
-        .slice(0, (showItems ? showItems : data.length));
+        // .slice(0, (showItems ? showItems : data.length));
     
 }
 
 
 const StackedBar = ({ cityCommuterRates, tip }) => {
+    const [margin, setMargin] = useState({ top: 40, bottom: 0, right: 0, left: (window.innerWidth > 700 ? 210 : 100) });
+    const [width, setWidth] = useState(Math.min(1000, 0.9*window.innerWidth));
     const wrapper = useRef(null);
+
     const data = useRef(cityCommuterRates);
     const svg = useRef(null);
-    const height = useRef(3000);
-    const width = useRef(900)
+    const height = useRef(3000);    
 
     const { year, mode, tractLocation, selectedSortVal, sortDirection, showItems } = useContext(StackedBarContext);
     data.current = formatData(cityCommuterRates, mode, year, tractLocation, selectedSortVal, sortDirection, showItems)
 
     const keys = ["City", "Suburbs/Exurbs", "Outside of Metro Area"];
+    // const sortLabels = ["City", "Work in Largest City", "Work Outside of Largest City", "Work Outside of Metro Area"];
+    // const sortLabelIds = ['totals', 'city', 'suburban', 'outside-msa'];
 
     const series = d3.stack()
         .keys(keys)(data.current)
         .map(d => (d.forEach(v => v.key = d.key), d))
 
-    const margin = { top: 20, bottom: 30, left: 210, right: 0 };
-
     const color = d3.scaleOrdinal()
         .domain(keys)
         .range(d3.schemeCategory10);
+    
+    useLayoutEffect(() => {
+        window.addEventListener('resize', () => {
+            setWidth(Math.min(1000, 0.9*window.innerWidth))
 
+            if (window.innerWidth > 700) {
+                setMargin({ top: 40, bottom: 0, left: 210, right: 0 });
+            }
+            else {
+                setMargin({ top: 40, bottom: 0, left: 100, right: 0 });
+            }
+        });
+    }, [])
 
     useEffect(() => {
-        // console.log(data.current.length);
         // data.current = formatData(cityCommuterRates, mode, year, tractLocation, selectedSortVal, sortDirection, showItems);
-        // console.log(data.current)
-
-        height.current = (18 * data.current.length) + margin.top + margin.bottom;
+        height.current = (18 * ( showItems ? showItems : data.current.length)) + margin.top + margin.bottom;
+        
+        // const labelPosition = d3.scaleBand()
+        //     .domain(sortLabels)
+        //     .range([0, width-margin.right])
+        //     .paddingOuter(0.3)
 
         if (svg.current === null) {
             d3.select(wrapper.current)
@@ -64,24 +80,51 @@ const StackedBar = ({ cityCommuterRates, tip }) => {
                 .append("svg")
                 .attr("class", "stacked-bar__svg")
                 .attr("height", height.current)
-                .attr("width", width.current)
+                .attr("width", width)
                 // .attr("viewBox", `0 0 ${width} ${height}`)
                 // .attr("preserveAspectRatio", "xMinYMin meet");
             
             svg.current.call(tip);
+
+            // svg.current.append("g")
+            //     .attr("class", "sort-options")
+            //     // .attr("transform", `translate(${margin.left}px, 0px)`)
+            //     .selectAll("text")
+            //     .data(sortLabels)
+            //     .join("text")
+            //         .attr("class", "sort-label")
+            //         .attr("id", (d,i) => sortLabelIds[i])
+            //         .attr("x", (d) => labelPosition(d))
+            //         .attr("y", 10)
+            //         .style("text-anchor", "start")
+            //         .style("font-size", "0.9rem")
+            //         .style("fill", (d,i) => d3.schemeCategory10[i-1])
+            //         .on('click', function() {
+            //             const element = d3.select(this);
+            //             const currentText = element.text();
+            //             element.text(currentText + " ▼")
+            //         })
+            //         .text(d => d)
+
         }
         else {
-            svg.current.attr("height", height.current)
+            svg.current
+                .attr("height", height.current)
+                .attr("width", width)
+
+            // svg.current.selectAll(".sort-label")
+            //     .attr("x", (d) => labelPosition(d))
         }
         
         const xDomain = mode === "totals" ? [0, d3.max(data.current, d => +d[`total_commuters_${year}`])] : [0, 1];
         const x = d3.scaleLinear()
             .domain(xDomain)
-            .range([margin.left, width.current - margin.right]);
+            .range([margin.left, width - margin.right]);
         const y = d3.scaleBand()
             .domain(data.current.map(d => d.MSA))
-            .range([margin.top, height.current-margin.bottom])
+            .range([margin.top, (18*data.current.length)+margin.top])
             .paddingInner(0.3)
+            .round(true)
 
         svg.current.selectAll("g")
             .data(series)
@@ -118,9 +161,11 @@ const StackedBar = ({ cityCommuterRates, tip }) => {
                 .attr("x", d => margin.left - 5)
                 .attr("y", d => y(d.MSA) + y.bandwidth())
                 .style("text-anchor", "end")
-                .text(d => `${d.largest_city} (${d.MSA.split(",")[1].slice(1)})`);
+                .text(d => {
+                    return width > 700 ? `${d.largest_city} (${d.MSA.split(",")[1].slice(1)})` : `${d.largest_city}`;
+                });
 
-    }, [year, mode, tractLocation, selectedSortVal, sortDirection, showItems])
+    }, [year, mode, tractLocation, selectedSortVal, sortDirection, showItems, width])
 
 
     // useEffect(() => {

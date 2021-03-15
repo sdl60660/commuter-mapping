@@ -2,14 +2,34 @@
 .map-controls {
     margin-bottom: $m-size;
     z-index: 20;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 0.5rem;
+    padding: 0 1rem;
+
+    @media screen and (max-width: $mobile-breakpoint) {
+        grid-template-columns: 1fr;
+    }
 }
 
-.map-controls__city-select {
+.map-controls__header {
+    font-weight: bold;
+    justify-self: right;
+    align-self: center;
+
+    @media screen and (max-width: $mobile-breakpoint) {
+        justify-self: center;
+    }
+}
+
+.map-controls__select {
     max-width: 30rem;
-    margin: auto;
+    width: 90%;
+    // margin: auto;
     text-align: left;
 
-    @media screen and (max-width: $mobile-breakpoint){
+    @media screen and (max-width: $mobile-breakpoint) {
         max-width: 90%;
+        margin: auto;
     }
 }

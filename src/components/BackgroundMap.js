@@ -22,7 +22,7 @@ const popup = new mapboxgl.Popup({
     closeOnClick: false
 });
 
-const addTractLayer = ({ map, featuredTracts, featuredCity }) => {
+const addTractLayer = ({ map, featuredTracts, featuredCity, displayField }) => {
     const scaleIndex = Math.round((parseInt(featuredCity) / 72)) % 10
     const stopColor = chromatic.schemeCategory10[scaleIndex];
 
@@ -38,7 +38,7 @@ const addTractLayer = ({ map, featuredTracts, featuredCity }) => {
         'layout': {},
         'paint': {
             'fill-color': {
-                property: 'city_commuter_rate_2018',
+                property: displayField,
                 stops: [[0, '#fff'], [1, stopColor]]
             },
             'fill-opacity': 0.7
@@ -46,7 +46,7 @@ const addTractLayer = ({ map, featuredTracts, featuredCity }) => {
     });
 }
 
-const addHoverLayer = ({ map, geoData, largestCityDisplay, layerId, nameAccessor }) => {
+const addHoverLayer = ({ map, geoData, largestCityDisplay, displayField, layerId, nameAccessor }) => {
 
     map.addSource(layerId, {
         'type': 'geojson',
@@ -97,13 +97,17 @@ const addHoverLayer = ({ map, geoData, largestCityDisplay, layerId, nameAccessor
 
             
             const featureProps = e.features[0].properties;
+            const displayVal = featureProps[displayField] === "null" ? "N/A" : d3.format(".1%")(featureProps[displayField])
+            const displayText = displayField.startsWith('city') ? `Job Location in ${largestCityDisplay}: ${displayVal}` :
+                                displayField.startsWith('suburban') ? `Job Location Outside of ${largestCityDisplay}: ${displayVal}` :
+                                `Job Location Outside of Metro Area: ${displayVal}`;
 
             map.getCanvas().style.cursor = 'pointer';
             popup
                 .setLngLat(e.lngLat)
                 .setHTML(`  <strong>${featureProps[nameAccessor]}, ${featureProps.STATE_ABBREVIATION}${layerId === "MCDs" ? " (MCD)" : ""}</strong>
                             <br>
-                            <div>Job Location in ${largestCityDisplay}: ${featureProps.city_commuter_rate_2018 === "null" ? "N/A" : d3.format(".1%")(featureProps.city_commuter_rate_2018)}</div>`)
+                            <div>${displayText}</div>`)
                 .addTo(map);
             
             const element = popup.getElement();
@@ -150,7 +154,7 @@ const BackgroundMap = ({ initialBounds, initialCenter, tractData, mcdData, cityD
     const [lat, setLat] = useState(initialCenter[0]);
     const [zoom, setZoom] = useState(9);
 
-    const { featuredCity, largestCityDisplay } = useContext(MapContext)
+    const { featuredCity, largestCityDisplay, displayField } = useContext(MapContext)
 
     const featuredTracts = filterGeoJSON({ originalGeoJSON: tractData, MSA_ID: featuredCity });
     const featuredMCDs = filterGeoJSON({ originalGeoJSON: mcdData, MSA_ID: featuredCity });
@@ -169,9 +173,9 @@ const BackgroundMap = ({ initialBounds, initialCenter, tractData, mcdData, cityD
         map.setMaxBounds(map.getBounds());
         
         map.on('load', () => {
-            addTractLayer({ map, featuredTracts, featuredCity });
-            addHoverLayer({ map, geoData: featuredMCDs, largestCityDisplay, layerId: "MCDs", nameAccessor: "MCD_NAME" });
-            addHoverLayer({ map, geoData: featuredCities, largestCityDisplay, layerId: "cities", nameAccessor: "PLACE_NAME" });
+            addTractLayer({ map, featuredTracts, featuredCity, displayField });
+            addHoverLayer({ map, geoData: featuredMCDs, largestCityDisplay, displayField, layerId: "MCDs", nameAccessor: "MCD_NAME" });
+            addHoverLayer({ map, geoData: featuredCities, largestCityDisplay, displayField, layerId: "cities", nameAccessor: "PLACE_NAME" });
         });
 
         map.on('zoom', () => {
@@ -187,9 +191,9 @@ const BackgroundMap = ({ initialBounds, initialCenter, tractData, mcdData, cityD
         if (!firstRender.current) {
             clearMap({ map: displayMap.current });
 
-            addTractLayer({ map: displayMap.current, featuredTracts, featuredCity });
-            addHoverLayer({ map: displayMap.current, geoData: featuredMCDs, largestCityDisplay, layerId: "MCDs", nameAccessor: "MCD_NAME" });
-            addHoverLayer({ map: displayMap.current, geoData: featuredCities, largestCityDisplay, layerId: "cities", nameAccessor: "PLACE_NAME" });
+            addTractLayer({ map: displayMap.current, featuredTracts, featuredCity, displayField });
+            addHoverLayer({ map: displayMap.current, geoData: featuredMCDs, largestCityDisplay, displayField, layerId: "MCDs", nameAccessor: "MCD_NAME" });
+            addHoverLayer({ map: displayMap.current, geoData: featuredCities, largestCityDisplay, displayField, layerId: "cities", nameAccessor: "PLACE_NAME" });
 
             displayMap.current.setMaxBounds(null);
             displayMap.current.fitBounds(d3.geoBounds(featuredTracts), { animate: false, padding: 40 });
@@ -198,7 +202,7 @@ const BackgroundMap = ({ initialBounds, initialCenter, tractData, mcdData, cityD
         else {
             firstRender.current = false;
         }
-    }, [featuredCity])
+    }, [featuredCity, displayField])
 
     return (
         <div>

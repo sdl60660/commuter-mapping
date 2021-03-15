@@ -20,6 +20,7 @@ const MapWrapper = ({ tractGeo, MsaCityMappings, stateGeo, cityBoundaries, MCDBo
 
     const [featuredCity, setFeaturedCity] = useState("35620")
     const [largestCityDisplay, setLargestCityDisplay] = useState("New York City")
+    const [displayField, setDisplayField] = useState("city_commuter_rate_2018")
 
     const refElement = useRef(null);
 
@@ -38,7 +39,7 @@ const MapWrapper = ({ tractGeo, MsaCityMappings, stateGeo, cityBoundaries, MCDBo
 
     return (
         <div className={"map-wrapper"}>
-            <MapContext.Provider value={{ featuredCity, setFeaturedCity, largestCityDisplay, setLargestCityDisplay }}>
+            <MapContext.Provider value={{ featuredCity, setFeaturedCity, largestCityDisplay, setLargestCityDisplay, displayField, setDisplayField }}>
                 <MapControls cityData={MsaCityMappings} />
                 <BackgroundMap
                     className="map-wrapper__background-tile"
