@@ -5,7 +5,7 @@ const Intro = (props) => {
     return (
         <div className={"intro-container"}>
             <div className={"intro-container__row"} id={"title-row"}>
-                <h1 className="intro-container__title">Exploring Urban Commuter Patterns</h1>
+                <h1 className="intro-container__title">Exploring Metro Commuter Patterns</h1>
             </div>
             <div className={"intro-container__row"}>
                 <p>
