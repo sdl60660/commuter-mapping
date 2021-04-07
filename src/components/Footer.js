@@ -16,6 +16,7 @@ const Footer = ({ githubLink = ""  }) => {
 
             <div className="footer__section">
                 <p><strong>Sources</strong></p>
+                <p>All LODES commuter data comes from the U.S. census, via the <a href="https://github.com/jamgreen/lehdr">lehdr tool</a>. Municipal boundaries and population data comes from the U.S. Census as well. Vote totals from the 2020 election come from the New York Times.</p>
             </div>
             
             <div className="footer__section">

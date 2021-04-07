@@ -13,7 +13,7 @@ us_states <- unique(fips_codes$state)[1:51]
 
 # Get geodata for all US Census Tracts
 us_tracts <- map_df(us_states, function(us_state) {
-  tracts(state = us_state, cb = TRUE, year = 2011)
+  tracts(state = us_state, cb = TRUE, year = 2018)
 })
 # tract_centroids <- gCentroid(spgeom = methods::as(object = us_tracts, Class = "Spatial" ), byid = TRUE )
 tract_centroids <- st_centroid(us_tracts) %>%
