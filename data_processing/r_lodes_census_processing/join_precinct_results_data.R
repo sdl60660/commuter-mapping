@@ -40,9 +40,9 @@ tract_vote_totals <- precincts_with_tracts %>%
   st_drop_geometry() %>%
   group_by(GEOID.y) %>%
   summarize(
-    votes_dem = votes_dem,
-    votes_rep = votes_rep,
-    votes_total = votes_total
+    votes_dem = sum(votes_dem),
+    votes_rep = sum(votes_rep),
+    votes_total = sum(votes_total)
   ) %>%
   rename(TRACT_ID = GEOID.y) %>%
   mutate(
@@ -101,8 +101,10 @@ final_tract_data_df <- tract_data_with_MSA_totals %>%
   left_join(us_tracts, by="GEOID") %>%
   filter(!is.na(tract_population_density))
 
-cor(final_tract_data_df$tract_population_density, final_tract_data_df$dem_lead)
-ggplot(final_tract_data_df, aes(x=tract_population_density, y=dem_lead)) + geom_point(size = 0.4, alpha=0.4) + geom_smooth(method=lm)
+write_csv(final_tract_data_df, '../data/all_tract_commuter_density_voter_correlation_data.csv')
+
+cor(final_tract_data_df$adjusted_commuter_rate, final_tract_data_df$dem_lead)
+ggplot(final_tract_data_df, aes(x=adjusted_commuter_rate, y=dem_lead)) + geom_point(size = 0.4, alpha=0.4) + geom_smooth(method=lm)
 
 mutated_df <- final_tract_data_df %>%
   mutate(

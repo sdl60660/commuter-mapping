@@ -169,7 +169,7 @@ const BackgroundMap = ({ initialBounds, initialCenter, tractData, mcdData, cityD
             // renderWorldCopies: false
         });
 
-        map.fitBounds(initialBounds, { animate: false, padding: 40 });
+        map.fitBounds(initialBounds, { animate: false, padding: 20 });
         map.setMaxBounds(map.getBounds());
         
         map.on('load', () => {

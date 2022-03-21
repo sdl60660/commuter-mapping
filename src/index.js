@@ -69,7 +69,7 @@ Promise.all(promises).then((allData) => {
 
   // Sort and filter commuter meta data
   let commuterRates = allData[5].filter(d => d.total_commuters_2018 > 0).sort((a, b) => b.total_commuters_2018 - a.total_commuters_2018)
-  console.log(commuterRates);
+  // console.log(commuterRates);
 
   ReactDOM.render(
     <div>
