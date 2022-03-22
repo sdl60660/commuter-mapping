@@ -45,9 +45,9 @@ const Inset = ({ visible = true, height = 140, width = 200, states }) => {
             <path
               className="state"
               d={path(state)}
-              stroke="black"
+              stroke="rgb(30, 28, 27)"
               strokeWidth="0.3"
-              fill="rgba(255,255,255,0.95)"
+              fill="rgba(246,246,244,0.95)"
             />
           ))}
           <circle
