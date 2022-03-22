@@ -1,47 +1,41 @@
-
 .legend {
-    max-width: 30rem;
-    // margin: $m-size $xl-size 0 auto;
-    position: absolute;
-    z-index: 10;
-    padding: $xs-size;
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.6);
-    
-    right: $xl-size;
-    margin-top: 8rem;
+  max-width: 30rem;
+  position: absolute;
+  z-index: 10;
+  padding: $xs-size;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.6);
 
-    @media screen and (max-width: $mobile-breakpoint) {
-        right: 50%;
-        transform: translateX(50%);
-        position: relative;
-        margin-top: $s-size;
-        // margin: $xl-size auto;
-        // top: 58%;
-    }
-    
+  right: $xl-size;
+  top: 1rem;
+
+  @media screen and (max-width: $mobile-breakpoint) {
+    right: 50%;
+    bottom: 5px;
+    top: unset;
+    transform: translateX(50%);
+  }
 }
 
 .legend__rect {
-    padding: 0 5px;
-    // width: 300px;
-    // height: 20px;
+  padding: 0 5px;
+  // width: 300px;
+  // height: 20px;
 }
 
 .legend__message {
-    margin-top: 3px;
-    font-size: $font-size-small;
+  margin-top: 3px;
+  font-size: $font-size-small;
 }
 
 .legend__gradient {
-
 }
 
 .legend__svg {
-    // height: 30px;
-    // width: 310px;
+  // height: 30px;
+  // width: 310px;
 }
 
 .legend .tick {
-    // font-size: $font-size-xs;
+  // font-size: $font-size-xs;
 }

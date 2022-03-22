@@ -14,6 +14,10 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+.mapbox-wrapper {
+  position: relative;
+}
+
 .mapboxgl-canvas:focus {
   // outline:0;
 }

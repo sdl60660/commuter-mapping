@@ -62,7 +62,6 @@ const MapWrapper = ({ tractGeo, MsaCityMappings, stateGeo, usOutline, cityBounda
           cityData={cityBoundaries}
           states={stateGeo}
         />
-        <MapLegend cityName={largestCityDisplay} />
       </MapContext.Provider>
     </div>
   );

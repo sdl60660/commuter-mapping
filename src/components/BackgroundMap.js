@@ -9,6 +9,7 @@ import { filterGeoJSON } from "../utils.js";
 import { MapContext } from "../MapContext";
 
 import InsetMap from "./InsetMap";
+import MapLegend from './MapLegend';
 
 mapboxgl.workerClass = MapboxWorker;
 mapboxgl.accessToken =
@@ -256,6 +257,7 @@ const BackgroundMap = ({ initialBounds, initialCenter, tractData, mcdData, cityD
   return (
     <div className="mapbox-wrapper">
       <InsetMap visible={true} states={states} />
+      <MapLegend cityName={largestCityDisplay} />
       <div className={"map-container"} ref={mapContainer} />
     </div>
   );
