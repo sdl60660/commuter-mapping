@@ -8,6 +8,8 @@ import * as d3 from "d3";
 import { filterGeoJSON } from "../utils.js";
 import { MapContext } from "../MapContext";
 
+import InsetMap from "./InsetMap";
+
 mapboxgl.workerClass = MapboxWorker;
 mapboxgl.accessToken =
   "pk.eyJ1Ijoic2FtbGVhcm5lciIsImEiOiJja2IzNTFsZXMwaG44MzRsbWplbGNtNHo0In0.BmjC6OX6egwKdm0fAmN_Nw";
@@ -155,7 +157,7 @@ const clearMap = ({ map }) => {
   });
 };
 
-const BackgroundMap = ({ initialBounds, initialCenter, tractData, mcdData, cityData }) => {
+const BackgroundMap = ({ initialBounds, initialCenter, tractData, mcdData, cityData, states }) => {
   const mapContainer = useRef();
   const firstRender = useRef(true);
   const displayMap = useRef(null);
@@ -164,7 +166,7 @@ const BackgroundMap = ({ initialBounds, initialCenter, tractData, mcdData, cityD
   const [lat, setLat] = useState(initialCenter[0]);
   const [zoom, setZoom] = useState(9);
 
-  const { featuredCity, largestCityDisplay, displayField } = useContext(MapContext);
+  const { featuredCity, largestCityDisplay, displayField, setCenter } = useContext(MapContext);
 
   const featuredTracts = filterGeoJSON({ originalGeoJSON: tractData, MSA_ID: featuredCity });
   const featuredMCDs = filterGeoJSON({ originalGeoJSON: mcdData, MSA_ID: featuredCity });
@@ -212,6 +214,10 @@ const BackgroundMap = ({ initialBounds, initialCenter, tractData, mcdData, cityD
       popup.remove();
     });
 
+    map.on("moveend", () => {
+      setCenter(map.getCenter());
+    });
+
     displayMap.current = map;
 
     return () => map.remove();
@@ -248,7 +254,8 @@ const BackgroundMap = ({ initialBounds, initialCenter, tractData, mcdData, cityD
   }, [featuredCity, displayField]);
 
   return (
-    <div>
+    <div className="mapbox-wrapper">
+      <InsetMap visible={true} states={states} />
       <div className={"map-container"} ref={mapContainer} />
     </div>
   );
