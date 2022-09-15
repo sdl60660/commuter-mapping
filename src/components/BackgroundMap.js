@@ -179,6 +179,7 @@ const BackgroundMap = ({ initialBounds, initialCenter, tractData, mcdData, cityD
       style: "mapbox://styles/mapbox/light-v10",
       center: [lng, lat],
       zoom: zoom,
+      maxZoom: 16.5
       // renderWorldCopies: false
     });
 
